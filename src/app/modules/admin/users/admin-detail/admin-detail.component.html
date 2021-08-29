@@ -1,0 +1,23 @@
+<p>admin-detail works!</p>
+
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%">
+    <mat-card-title>Detaille</mat-card-title>
+    <mat-card-content>
+      <div fxLayout="column wrap" fxLayoutGap="40px">
+
+        <div fxLayout="row wrap" fxFlex>
+          <div fxFlex><strong>Admin's id:</strong></div>
+          <div fxFlex>{{admin?.idDecid}}</div>
+        </div>
+
+        <div fxLayout="row wrap" fxFlex>
+          <div fxFlex><strong>Nom:</strong></div>
+          <div fxFlex>{{admin?.nomDecid}}</div>
+        </div>
+        <button [routerLink]="['/admin-list/']" mat-raised-button color="primary">Close</button>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</section>

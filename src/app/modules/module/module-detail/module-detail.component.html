@@ -1,0 +1,47 @@
+<p>module-detail works!</p>
+
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%">
+      <mat-card-title>Detaille</mat-card-title>
+      <mat-card-content>
+        <div fxLayout="column wrap" fxLayoutGap="40px">
+          <div fxLayout="row wrap" fxFlex>
+            <div fxFlex><strong>Code:</strong></div>
+            <div fxFlex>{{module?.codeModule}}</div>
+          </div>
+
+          <div fxLayout="row wrap" fxFlex>
+            <div fxFlex><strong>Designation:</strong></div>
+            <div fxFlex>{{module?.designation}}</div>
+          </div>
+
+          <div fxLayout="row wrap" fxFlex>
+            <div fxFlex><strong>Description:</strong></div>
+            <div fxFlex>{{module?.description}}</div>
+          </div>
+
+          <div fxLayout="row wrap" fxFlex>
+            <div fxFlex><strong>Nb Heures:</strong></div>
+            <div fxFlex>{{module?.nbHeures}}</div>
+          </div>
+
+          <div fxLayout="row wrap" fxFlex>
+            <div fxFlex><strong>Coefficient:</strong></div>
+            <div fxFlex>{{module?.coef}}</div>
+          </div>
+
+          <div fxLayout="row wrap" fxFlex>
+            <div fxFlex><strong>Num Panier:</strong></div>
+            <div fxFlex>{{module?.numPanier}}</div>
+          </div>
+
+          <div fxLayout="row wrap" fxFlex>
+            <div fxFlex><strong>Etat:</strong></div>
+            <div fxFlex>{{module?.etat}}</div>
+          </div>
+          <button [routerLink]="['/modules-list/']" mat-raised-button color="primary">Close</button>
+        </div>
+      </mat-card-content>
+
+    </mat-card>
+</section>

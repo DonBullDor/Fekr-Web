@@ -1,0 +1,24 @@
+<p>classe works!</p>
+
+<table class="table table-sm">
+  <tr>
+    <th>Code Classe</th>
+    <th>Libelle</th>
+    <th>Description</th>
+  </tr>
+  <tr *ngFor="let c of classes">
+    <td>{{c.codeCl}}</td>
+    <td>{{c.libelleCl}}</td>
+    <td>{{c.descriptionCl}}</td>
+  </tr>
+</table>
+
+<div class="p-2">
+  <table class="table table-sm">
+    <tr>
+      <th>id</th>
+      <td>{{classe.codeCl}}</td>
+    </tr>
+  </table>
+</div>
+<hr>

@@ -1,0 +1,27 @@
+<p>classe-detail works!</p>
+
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%">
+    <mat-card-title>Detaille</mat-card-title>
+    <mat-card-content>
+      <div fxLayout="column wrap" fxLayoutGap="40px">
+        <div fxLayout="row wrap" fxFlex>
+          <div fxFlex><strong>Code:</strong></div>
+          <div fxFlex>{{classe?.codeCl}}</div>
+        </div>
+
+        <div fxLayout="row wrap" fxFlex>
+          <div fxFlex><strong>Libelle:</strong></div>
+          <div fxFlex>{{classe?.libelleCl}}</div>
+        </div>
+
+        <div fxLayout="row wrap" fxFlex>
+          <div fxFlex><strong>Description:</strong></div>
+          <div fxFlex>{{classe?.descriptionCl}}</div>
+        </div>
+        <button [routerLink]="['/classe-list/']" mat-raised-button color="primary">Close</button>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</section>

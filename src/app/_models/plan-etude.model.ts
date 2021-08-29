@@ -1,0 +1,10 @@
+export class PlanEtude{
+  constructor(
+    public codeModule?: string,
+    public codeCl?: string,
+    public anneeDeb?: string,
+    public idEns?: string,
+    public anneeFin?: string
+  ){}
+}
+

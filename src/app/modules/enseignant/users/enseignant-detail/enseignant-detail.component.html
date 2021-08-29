@@ -1,0 +1,27 @@
+<p>enseignant-detail works!</p>
+
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%">
+      <mat-card-title>Detaille</mat-card-title>
+      <mat-card-content>
+        <div fxLayout="column wrap" fxLayoutGap="40px">
+          <div fxLayout="row wrap" fxFlex>
+            <div fxFlex><strong>Id:</strong></div>
+            <div fxFlex>{{enseignant?.idEns}}</div>
+          </div>
+
+          <div fxLayout="row wrap" fxFlex>
+            <div fxFlex><strong>Nom:</strong></div>
+            <div fxFlex>{{enseignant?.nomEns}}</div>
+          </div>
+
+          <div fxLayout="row wrap" fxFlex>
+            <div fxFlex><strong>Mail:</strong></div>
+            <div fxFlex>{{enseignant?.mailEns}}</div>
+          </div>
+          <button [routerLink]="['/enseignant-list/']" mat-raised-button color="primary">Close</button>
+
+        </div>
+      </mat-card-content>
+    </mat-card>
+</section>

@@ -1,0 +1,31 @@
+<p>etudiant works!</p>
+
+<table class="table table-sm">
+  <tr>
+    <th>id</th>
+    <th>Nom</th>
+    <th>Email</th>
+  </tr>
+  <tr *ngFor="let etudiant of etudiants">
+    <td>{{etudiant.idEt}}</td>
+    <td>{{etudiant.nomEt}}</td>
+    <td>{{etudiant.eMailEt}}</td>
+  </tr>
+</table>
+
+<div class="p-2">
+  <table class="table table-sm">
+    <tr>
+      <th>id</th>
+      <td>{{etudiant.idEt}}</td>
+    </tr>
+    <tr>
+      <th>Nom</th>
+      <td>{{etudiant.nomEt}}</td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td>{{etudiant.eMailEt}}</td>
+    </tr>
+  </table>
+</div>

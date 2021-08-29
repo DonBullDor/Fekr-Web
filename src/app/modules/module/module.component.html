@@ -1,0 +1,16 @@
+<p>module works!</p>
+
+<table class="table table-sm">
+  <tr>
+    <th>Code Module</th>
+    <th>Designation</th>
+    <th>Nb Heures</th>
+    <th>Coefficient</th>
+  </tr>
+  <tr *ngFor="let module of modules">
+    <td>{{module.codeModule}}</td>
+    <td>{{module.designation}}</td>
+    <td>{{module.nbHeures}}</td>
+    <td>{{module.coef}}</td>
+  </tr>
+</table>

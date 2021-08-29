@@ -1,0 +1,16 @@
+<p>enseignant works!</p>
+
+<table class="table table-sm">
+  <tr>
+    <th>id</th>
+    <th>Nom</th>
+    <th>Email</th>
+    <th>Password</th>
+  </tr>
+  <tr *ngFor="let enseignant of enseignants">
+    <td>{{enseignant.idEns}}</td>
+    <td>{{enseignant.nomEns}}</td>
+    <td>{{enseignant.mailEns}}</td>
+    <td>{{enseignant.pwdEns}}</td>
+  </tr>
+</table>

@@ -1,0 +1,37 @@
+<p>etudiant-detail works!</p>
+
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%">
+      <mat-card-title>Detaille</mat-card-title>
+      <mat-card-content>
+        <div fxLayout="column wrap" fxLayoutGap="40px">
+          <div fxLayout="row wrap" fxFlex>
+            <div fxFlex><strong>Admin's id:</strong></div>
+            <div fxFlex>{{etudiant?.idEt}}</div>
+          </div>
+
+          <div fxLayout="row wrap" fxFlex>
+            <div fxFlex><strong>Nom:</strong></div>
+            <div fxFlex>{{etudiant?.nomEt}}</div>
+          </div>
+
+          <div fxLayout="row wrap" fxFlex>
+            <div fxFlex><strong>Prenom:</strong></div>
+            <div fxFlex>{{etudiant?.pnomEt}}</div>
+          </div>
+
+          <div fxLayout="row wrap" fxFlex>
+            <div fxFlex><strong>Mail:</strong></div>
+            <div fxFlex>{{etudiant?.eMailEt}}</div>
+          </div>
+
+          <div fxLayout="row wrap" fxFlex>
+            <div fxFlex><strong>Classe Courant:</strong></div>
+            <div fxFlex>{{etudiant?.classeCouranteEt}}</div>
+          </div>
+
+        </div>
+      </mat-card-content>
+
+    </mat-card>
+</section>
