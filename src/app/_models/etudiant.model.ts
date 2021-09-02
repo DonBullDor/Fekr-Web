@@ -7,7 +7,7 @@ export class Etudiant {
     public anneeEntreeEspEt?: string,
     public classeCouranteEt?: string,
     public eMailParent?: string,
-    public loin?: string,
+    public login?: string,
     public password?: string,
     public emailPereEt?: string,
     public emailMereEt?: string,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { ViewChild } from '@angular/core';
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   templateUrl: './etudiant-list.component.html',
   styleUrls: ['./etudiant-list.component.css']
 })
-export class EtudiantListComponent implements OnInit {
+export class EtudiantListComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['id', 'nom', 'email', 'update', 'detail'];
   public dataSource = new MatTableDataSource<Etudiant>();
@@ -46,8 +46,8 @@ export class EtudiantListComponent implements OnInit {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 
-  get etudiants() {
-    return this.repo.getEtudiants;
+  get etudiants(): Etudiant[] {
+    return this.repo.etudiants;
   }
 
   public redirectToDetails = (id: string) => {

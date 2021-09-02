@@ -1,6 +1,6 @@
 import { Module } from '../_models/module.model';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
@@ -9,8 +9,8 @@ export class ModuleService {
   modules: Module[];
 
   constructor(private http: HttpClient) {
-    this.getModules();
-    this.getModule('FKR-SV INF');
+    this.getAllModules();
+    this.getModuleById('FKR-SV INF');
   }
 
   public getData = (route: string) => {
@@ -21,24 +21,24 @@ export class ModuleService {
     return `${envAddress}/${route}`;
   }
 
-  getModule(id: string) {
+  public create = (route: string, body) => {
+    return this.http.post(this.createCompleteRoute(route, environment.apiUrl), body, this.generateHeaders());
+  }
+
+  getModuleById(id: string): void {
     this.http.get<Module>('http://localhost:5000/api/Modules/' + id)
       .subscribe(p => this.module = p);
   }
 
-  getModules() {
+  getAllModules(): void {
     this.http.get<Module[]>('http://localhost:5000/api/Modules')
       .subscribe(p => this.modules = p);
   }
 
-  createModule(module: Module) {
+  createModule(module: Module): void {
     const data = {
       code: module.codeModule,
       designation: module.designation,
-      description: module.description,
-      nbHeures: module.nbHeures,
-      coefficient: module.coef,
-      numeroPanier: module.numPanier,
       etat: module.etat
     };
     this.http.post<string>('/api/Modules', data)
@@ -48,30 +48,32 @@ export class ModuleService {
       });
   }
 
-  replaceModule(module: Module) {
+  replaceModule(module: Module): void {
     const data = {
       code: module.codeModule,
       designation: module.designation,
-      description: module.description,
-      nbHeures: module.nbHeures,
-      coefficient: module.coef,
-      numeroPanier: module.numPanier,
       etat: module.etat
     };
     this.http.put('/api/Modules/' + module.codeModule, data)
-      .subscribe(() => this.getModules());
+      .subscribe(() => this.getAllModules());
   }
 
-  updateModule(id: string, changes: Map<string, any>) {
+  updateModule(id: string, changes: Map<string, any>): void {
     const patch = [];
     changes.forEach((value, key) =>
       patch.push({ op: 'replace', path: key, value }));
     this.http.patch('/api/Modules/' + id, patch)
-      .subscribe(() => this.getModules());
+      .subscribe(() => this.getAllModules());
   }
 
-  deleteModule(id: string) {
+  deleteModule(id: string): void {
     this.http.delete('/api/Modules/' + id)
-      .subscribe(() => this.getModules());
+      .subscribe(() => this.getAllModules());
+  }
+
+  private generateHeaders = () => {
+    return {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
   }
 }

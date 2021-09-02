@@ -1,6 +1,6 @@
 import { Etudiant } from '../_models/etudiant.model';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class EtudiantService {
 
   constructor(private http: HttpClient) {
     this.getEtudiant('1511FT-056');
-    this.getEtudiants();
+    this.getAllEtudiants();
   }
 
   public getData = (route: string) => {
@@ -21,17 +21,21 @@ export class EtudiantService {
     return `${envAddress}/${route}`;
   }
 
-  getEtudiant(id: string) {
+  public create = (route: string, body) => {
+    return this.http.post(this.createCompleteRoute(route, environment.apiUrl), body, this.generateHeaders());
+  }
+
+  getEtudiant(id: string): void {
     this.http.get<Etudiant>('http://localhost:5000/api/Etudiants/' + id)
       .subscribe(p => this.etudiant = p);
   }
 
-  getEtudiants() {
+  getAllEtudiants(): void {
     this.http.get<Etudiant[]>('http://localhost:5000/api/Etudiants/')
       .subscribe(p => this.etudiants = p);
   }
 
-  createEtudiant(etudiant: Etudiant) {
+  createEtudiant(etudiant: Etudiant): void {
     const data = {
       id: etudiant.idEt,
       nom: etudiant.nomEt,
@@ -40,7 +44,7 @@ export class EtudiantService {
       anneeEntree: etudiant.anneeEntreeEspEt,
       classeCourant: etudiant.classeCouranteEt,
       mailParent: etudiant.eMailParent,
-      login: etudiant.loin,
+      login: etudiant.login,
       password: etudiant.password,
       mailPere: etudiant.emailPereEt,
       mailMere: etudiant.emailMereEt,
@@ -56,7 +60,7 @@ export class EtudiantService {
       });
   }
 
-  replaceEtudiant(etudiant: Etudiant) {
+  replaceEtudiant(etudiant: Etudiant): void {
     const data = {
       id: etudiant.idEt,
       nom: etudiant.nomEt,
@@ -65,7 +69,7 @@ export class EtudiantService {
       anneeEntree: etudiant.anneeEntreeEspEt,
       classeCourant: etudiant.classeCouranteEt,
       mailParent: etudiant.eMailParent,
-      login: etudiant.loin,
+      login: etudiant.login,
       password: etudiant.password,
       mailPere: etudiant.emailPereEt,
       mailMere: etudiant.emailMereEt,
@@ -75,19 +79,25 @@ export class EtudiantService {
       passwordParent: etudiant.pwdParent
     };
     this.http.put('/api/Etudiants/' + etudiant.idEt, data)
-      .subscribe(() => this.getEtudiants());
+      .subscribe(() => this.getAllEtudiants());
   }
 
-  updateEtudiant(id: string, changes: Map<string, any>) {
+  updateEtudiant(id: string, changes: Map<string, any>): void {
     const patch = [];
     changes.forEach((value, key) =>
       patch.push({ op: 'replace', path: key, value }));
     this.http.patch('/api/Etudiants/' + id, patch)
-      .subscribe(() => this.getEtudiants());
+      .subscribe(() => this.getAllEtudiants());
   }
 
-  deleteEtudiant(id: string) {
+  deleteEtudiant(id: string): void {
     this.http.delete('/api/Etudiants/' + id)
-      .subscribe(() => this.getEtudiants());
+      .subscribe(() => this.getAllEtudiants());
+  }
+
+  private generateHeaders = () => {
+    return {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
   }
 }

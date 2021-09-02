@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { ViewChild } from '@angular/core';
@@ -13,7 +13,7 @@ import { ErrorHandlerService } from 'src/app/_services/error-handler.service';
   templateUrl: './module-list.component.html',
   styleUrls: ['./module-list.component.css']
 })
-export class ModuleListComponent implements OnInit {
+export class ModuleListComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['code', 'designation', 'coef', 'etat', 'detail', 'update'];
   public dataSource = new MatTableDataSource<Module>();
@@ -37,8 +37,8 @@ export class ModuleListComponent implements OnInit {
         });
   }
 
-  get modules() {
-    return this.repo.getModules;
+  get modules(): Module[] {
+    return this.repo.modules;
   }
 
   ngAfterViewInit(): void {

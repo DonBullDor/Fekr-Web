@@ -1,8 +1,6 @@
-em {
-  color: #e71515;
-  font-weight: bold;
+mat-form-field{
+  width: 400px;
 }
-
-.ng-invalid.ng-touched {
-  border-color: red;
+mat-card-title{
+  text-align: center;
 }

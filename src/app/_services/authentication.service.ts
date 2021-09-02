@@ -14,7 +14,7 @@ export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<Etudiant>;
   public currentUser: Observable<Etudiant>;
 
-  private currentAdminSubject: BehaviorSubject<Admin>
+  private currentAdminSubject: BehaviorSubject<Admin>;
   public currentAdmin: Observable<Admin>;
 
   private currentEnseignantSubject: BehaviorSubject<Enseignant>;
@@ -68,7 +68,7 @@ export class AuthenticationService {
       }));
   }
 
-  loginAdmin(username: string, password: string) {
+  loginAdmin(username: string, password: string): Observable<any> {
     console.log(username, 'data login', password);
     return this.http.post<any>(`${environment.apiUrl}/Admins/authenticate`, { username, password })
       .pipe(map(user => {
@@ -79,7 +79,7 @@ export class AuthenticationService {
       }));
   }
 
-  loginEnseignant(username: string, password: string) {
+  loginEnseignant(username: string, password: string): Observable<any> {
     console.log(username, 'data login', password);
     return this.http.post<any>(`${environment.apiUrl}/enseignant/authenticate`, { username, password })
       .pipe(map(user => {
@@ -90,7 +90,7 @@ export class AuthenticationService {
       }));
   }
 
-  loginParent(username: string, password: string) {
+  loginParent(username: string, password: string): Observable<any> {
     console.log(username, 'data login', password);
     return this.http.post<any>(`${environment.apiUrl}/parent/authenticate`, { username, password })
       .pipe(map(user => {
@@ -101,23 +101,23 @@ export class AuthenticationService {
       }));
   }
 
-  logout() {
+  logout(): void {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }
 
-  logoutAdmin() {
+  logoutAdmin(): void {
     localStorage.removeItem('currentAdmin');
     this.currentAdminSubject.next(null);
   }
 
-  logoutEnseignant() {
+  logoutEnseignant(): void {
     localStorage.removeItem('currentEnseignant');
     this.currentEnseignantSubject.next(null);
   }
 
-  logoutParent() {
+  logoutParent(): void {
     localStorage.removeItem('currentParent');
     this.currentParentSubject.next(null);
   }

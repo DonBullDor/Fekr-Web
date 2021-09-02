@@ -1,6 +1,6 @@
 import { Classe } from '../_models/classe.model';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
@@ -9,8 +9,8 @@ export class ClasseService {
   classes: Classe[];
 
   constructor(private http: HttpClient) {
-    this.getClasse('4 M 2');
-    this.getClasses();
+    this.getClasseById('4 M 2');
+    this.getAllClasses();
   }
 
   public getData = (route: string) => {
@@ -21,21 +21,23 @@ export class ClasseService {
     return `${envAddress}/${route}`;
   }
 
-  getClasse(id: string) {
+  public create = (route: string, body) => {
+    return this.http.post(this.createCompleteRoute(route, environment.apiUrl), body, this.generateHeaders());
+  }
+
+  getClasseById(id: string): void {
     this.http.get<Classe>('http://localhost:5000/api/Classes/' + id)
       .subscribe(p => this.classe = p);
   }
 
-  getClasses() {
+  getAllClasses(): void {
     this.http.get<Classe[]>('http://localhost:5000/api/Classes')
       .subscribe(p => this.classes = p);
   }
 
-  createClasse(classe: Classe) {
-    let data = {
-      codeClasse: classe.codeCl,
-      libelleClasse: classe.libelleCl,
-      description: classe.descriptionCl
+  createClasse(classe: Classe): void {
+    const data = {
+      codeClasse: classe.codeCl
     };
     this.http.post<string>('/api/Classes', data)
       .subscribe(id => {
@@ -44,26 +46,30 @@ export class ClasseService {
       });
   }
 
-  replaceClasse(classe: Classe) {
-    let data = {
-      codeClasse: classe.codeCl,
-      libelleClasse: classe.libelleCl,
-      description: classe.descriptionCl
+  replaceClasse(classe: Classe): void {
+    const data = {
+      codeClasse: classe.codeCl
     };
     this.http.put('/api/Classes/' + classe.codeCl, data)
-      .subscribe(() => this.getClasses());
+      .subscribe(() => this.getAllClasses());
   }
 
-  updateClasse(id: string, changes: Map<string, any>) {
-    let patch = [];
+  updateClasse(id: string, changes: Map<string, any>): void {
+    const patch = [];
     changes.forEach((value, key) =>
-      patch.push({ op: 'replace', path: key, value: value }));
+      patch.push({ op: 'replace', path: key, value }));
     this.http.patch('/api/Classes/' + id, patch)
-      .subscribe(() => this.getClasses());
+      .subscribe(() => this.getAllClasses());
   }
 
-  deleteClasse(id: string) {
+  deleteClasse(id: string): void {
     this.http.delete('/api/Classes/' + id)
-      .subscribe(() => this.getClasses());
+      .subscribe(() => this.getAllClasses());
+  }
+
+  private generateHeaders = () => {
+    return {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
   }
 }

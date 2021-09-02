@@ -36,7 +36,7 @@ export class ErrorHandlerService {
 
   }
 
-  private createErrorMessage(error: HttpErrorResponse) {
+  private createErrorMessage(error: HttpErrorResponse): void {
     this.errorMessage = error.error ? error.error : error.statusText;
   }
 }

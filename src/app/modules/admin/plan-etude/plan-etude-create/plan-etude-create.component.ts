@@ -24,18 +24,25 @@ export class PlanEtudeCreateComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
-  constructor(private repo: PlanEtudeService, private activeRoute: ActivatedRoute, private errorHandler: ErrorHandlerService,
-    private _formBuilder: FormBuilder, private router: Router,
-    public loader: LoadingBarService) {
+  constructor(private planEtudeRepo: PlanEtudeService,
+              private activeRoute: ActivatedRoute,
+              private errorHandler: ErrorHandlerService,
+              private formBuilder: FormBuilder,
+              private router: Router,
+              public loader: LoadingBarService) {
 
   }
 
-  ngOnInit() {
-    // this.firstFormGroup = this._formBuilder.group({
-    //   firstCtrl: ['', Validators.required]
-    // });
-    // this.secondFormGroup = this._formBuilder.group({
-    //   secondCtrl: ['', Validators.required]
-    // });
+  ngOnInit(): void {
+    this.firstFormGroup = this.formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this.formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
+  }
+
+  public getAllYears = () => {
+    this.planEtudeRepo.getData('api/Societe');
   }
 }

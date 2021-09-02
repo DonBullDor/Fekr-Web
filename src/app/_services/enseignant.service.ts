@@ -1,6 +1,6 @@
 import { Enseignant } from '../_models/enseignant.model';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
@@ -9,7 +9,7 @@ export class EnseignantService {
   enseignants: Enseignant[];
 
   constructor(private http: HttpClient) {
-    this.getEnseignants();
+    this.getAllEnseignants();
   }
 
   public getData = (route: string) => {
@@ -20,20 +20,29 @@ export class EnseignantService {
     return `${envAddress}/${route}`;
   }
 
-  getEnseignant(id: string) {
+  public create = (route: string, body) => {
+    return this.http.post(this.createCompleteRoute(route, environment.apiUrl), body, this.generateHeaders());
+  }
+
+  getEnseignantById(id: string): void {
     this.http.get<Enseignant>('http://localhost:5000/api/Enseignants/' + id)
       .subscribe(p => this.enseignant = p);
   }
 
-  getEnseignants() {
+  getAllEnseignants(): void {
     this.http.get<Enseignant[]>('http://localhost:5000/api/Enseignants')
       .subscribe(p => this.enseignants = p);
   }
 
-  createEnseignant(enseignant: Enseignant) {
+  createEnseignant(enseignant: Enseignant): void {
     const data = {
       id: enseignant.idEns,
       nom: enseignant.nomEns,
+      type: enseignant.typeEns,
+      etat: enseignant.etat,
+      tel1: enseignant.tel1,
+      tel2: enseignant.tel2,
+      prenom: enseignant.pnom,
       mail: enseignant.mailEns,
       password: enseignant.pwdEns
     };
@@ -44,27 +53,38 @@ export class EnseignantService {
       });
   }
 
-  replaceEnseignant(enseignant: Enseignant) {
+  replaceEnseignant(enseignant: Enseignant): void {
     const data = {
       id: enseignant.idEns,
       nom: enseignant.nomEns,
+      type: enseignant.typeEns,
+      etat: enseignant.etat,
+      tel1: enseignant.tel1,
+      tel2: enseignant.tel2,
+      prenom: enseignant.pnom,
       mail: enseignant.mailEns,
       password: enseignant.pwdEns
     };
     this.http.put('/api/Enseignants/' + enseignant.idEns, data)
-      .subscribe(() => this.getEnseignants());
+      .subscribe(() => this.getAllEnseignants());
   }
 
-  updateEnseignant(id: string, changes: Map<string, any>) {
+  updateEnseignant(id: string, changes: Map<string, any>): void {
     const patch = [];
     changes.forEach((value, key) =>
       patch.push({ op: 'replace', path: key, value }));
     this.http.patch('/api/Enseignants/' + id, patch)
-      .subscribe(() => this.getEnseignants());
+      .subscribe(() => this.getAllEnseignants());
   }
 
-  deleteEnseignant(id: string) {
+  deleteEnseignant(id: string): void {
     this.http.delete('/api/Enseignants/' + id)
-      .subscribe(() => this.getEnseignants());
+      .subscribe(() => this.getAllEnseignants());
+  }
+
+  private generateHeaders = () => {
+    return {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
   }
 }

@@ -1,1 +1,33 @@
 <p>plan-etude-detail works!</p>
+
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%">
+    <mat-card-title>Detaille</mat-card-title>
+    <mat-card-content>
+      <div fxLayout="column wrap" fxLayoutGap="40px">
+
+        <div fxLayout="row wrap" fxFlex>
+          <div fxFlex><strong>Code Module:</strong></div>
+          <div fxFlex>{{planEtude?.codeModule}}</div>
+        </div>
+
+        <div fxLayout="row wrap" fxFlex>
+          <div fxFlex><strong>Classe:</strong></div>
+          <div fxFlex>{{planEtude?.codeCl}}</div>
+        </div>
+
+        <div fxLayout="row wrap" fxFlex>
+          <div fxFlex><strong>ID Enseignant:</strong></div>
+          <div fxFlex>{{planEtude?.idEns}}</div>
+        </div>
+
+        <div fxLayout="row wrap" fxFlex>
+          <div fxFlex><strong>Annee:</strong></div>
+          <div fxFlex>{{planEtude?.anneeDeb}}</div>
+        </div>
+        <button [routerLink]="['/plan-etude-list/']" mat-raised-button color="primary">Close</button>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</section>

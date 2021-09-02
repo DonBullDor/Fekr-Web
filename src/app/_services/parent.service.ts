@@ -19,12 +19,12 @@ export class ParentService {
     return `${envAddress}/${route}`;
   }
 
-  getParent(id: string) {
+  getParentById(id: string): void {
     this.http.get<Etudiant>('http://localhost:5000/api/Etudiants/' + id)
       .subscribe(p => this.etudiant = p);
   }
 
-  getEtudiants() {
+  getEtudiants(): void {
     this.http.get<Etudiant[]>('http://localhost:5000/api/Etudiants/')
       .subscribe(p => this.etudiants = p);
   }

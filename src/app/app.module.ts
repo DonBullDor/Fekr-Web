@@ -92,6 +92,8 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { LOADING_BAR_CONFIG } from '@ngx-loading-bar/core';
 import { EmploiDuTempCreate1Component } from './modules/admin/emploi-du-temps/emploi-du-temp-create1/emploi-du-temp-create1.component';
+import {PlanEtudeService} from './_services';
+import {NotesServices} from './_services/notes.services';
 
 @NgModule({
   declarations: [
@@ -178,6 +180,8 @@ import { EmploiDuTempCreate1Component } from './modules/admin/emploi-du-temps/em
     LoadingBarModule
   ],
   providers: [
+    PlanEtudeService,
+    NotesServices,
     // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 

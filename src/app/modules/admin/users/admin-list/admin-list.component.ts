@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminService } from '../../../../_services/admin.service';
 import { Admin } from '../../../../_models/admin.model';
@@ -13,14 +13,15 @@ import { ErrorHandlerService } from '../../../../_services/error-handler.service
   templateUrl: './admin-list.component.html',
   styleUrls: ['./admin-list.component.css']
 })
-export class AdminListComponent implements OnInit {
+export class AdminListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['nomDecid', 'idDecid', 'update'];
   public dataSource = new MatTableDataSource<Admin>();
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(private repo: AdminService, private router: Router,
-    private errorService: ErrorHandlerService) { }
+  constructor(private repo: AdminService,
+              private router: Router,
+              private errorService: ErrorHandlerService) { }
 
   ngOnInit(): void {
     this.getAllAdmins();
@@ -33,14 +34,14 @@ export class AdminListComponent implements OnInit {
       },
         (error) => {
           this.errorService.handleError(error);
-        })
+        });
   }
 
-  get decids(): Admin[] {
+  get admins(): Admin[] {
     return this.repo.admins;
   }
 
-  get decid() {
+  get admin(): Admin {
     return this.repo.admin;
   }
 
@@ -54,7 +55,7 @@ export class AdminListComponent implements OnInit {
   }
 
   public redirectToDetails = (id: string) => {
-    let url: string = `/admin-detail/${id}`;
+    const url = `/admin-detail/${id}`;
     this.router.navigate([url]);
   }
 

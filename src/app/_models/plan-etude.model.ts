@@ -3,8 +3,7 @@ export class PlanEtude{
     public codeModule?: string,
     public codeCl?: string,
     public anneeDeb?: string,
-    public idEns?: string,
-    public anneeFin?: string
+    public idEns?: string
   ){}
 }
 

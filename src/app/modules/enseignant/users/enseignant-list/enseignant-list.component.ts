@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { ViewChild } from '@angular/core';
@@ -13,13 +13,14 @@ import { ErrorHandlerService } from 'src/app/_services/error-handler.service';
   templateUrl: './enseignant-list.component.html',
   styleUrls: ['./enseignant-list.component.css']
 })
-export class EnseignantListComponent implements OnInit {
+export class EnseignantListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['id', 'nom', 'email', 'update', 'detail'];
   public dataSource = new MatTableDataSource<Enseignant>();
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(private repo: EnseignantService, private router: Router,
+  constructor(private repo: EnseignantService,
+              private router: Router,
               private errorService: ErrorHandlerService) { }
 
   ngOnInit(): void {

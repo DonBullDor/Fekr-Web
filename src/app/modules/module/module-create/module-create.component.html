@@ -1,1 +1,36 @@
 <p>module-create works!</p>
+
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%">
+    <mat-card-title>Create a new admin</mat-card-title>
+    <form [formGroup]="moduleForm" autocomplete="off" novalidate (ngSubmit)="createModule(moduleForm.value)" fxLayout="column wrap"
+          fxLayoutAlign="center center" fxLayoutGap="10px">
+      <mat-card-content>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Code module" formControlName="codeModule" id="codeModule">
+          <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('codeModule', 'required')">Code Module is required</mat-error>
+          <mat-error *ngIf="hasError('codeModule', 'maxlength')">You have more than 60 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="Designation" formControlName="designation" id="designation">
+          <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('designation', 'required')">Designation is required</mat-error>
+          <mat-error *ngIf="hasError('designation', 'maxlength')">You have more than 60 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="Etat" formControlName="etat">
+          <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('etat', 'required')">Etat is required</mat-error>
+          <mat-error *ngIf="hasError('etat', 'maxlength')">You have more than 100 characters</mat-error>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions align="center">
+        <button mat-raised-button color="primary" [disabled]="!moduleForm.valid">Create</button>
+        <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</section>
