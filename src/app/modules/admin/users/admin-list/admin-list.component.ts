@@ -59,8 +59,9 @@ export class AdminListComponent implements OnInit, AfterViewInit {
     this.router.navigate([url]);
   }
 
-  public redirectToUpdate = (id: string) => {
-
+  public redirectToUpdatePage = (id) => {
+    const updateUrl = `/admin-update/${id}`;
+    this.router.navigate([updateUrl]);
   }
 
   public redirectToDelete = (id: string) => {

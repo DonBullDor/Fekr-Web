@@ -94,6 +94,7 @@ import { LOADING_BAR_CONFIG } from '@ngx-loading-bar/core';
 import { EmploiDuTempCreate1Component } from './modules/admin/emploi-du-temps/emploi-du-temp-create1/emploi-du-temp-create1.component';
 import {PlanEtudeService} from './_services';
 import {NotesServices} from './_services/notes.services';
+import { ClasseUpdateComponent } from './modules/classe/classe-update/classe-update.component';
 
 @NgModule({
   declarations: [
@@ -141,7 +142,8 @@ import {NotesServices} from './_services/notes.services';
     InternalServerErrorComponent,
     SaisieNotesComponent,
     EmploiDuTempsDetailComponent,
-    EmploiDuTempCreate1Component
+    EmploiDuTempCreate1Component,
+    ClasseUpdateComponent
   ],
   imports: [
     BrowserModule,

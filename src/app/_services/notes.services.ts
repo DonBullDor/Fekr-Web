@@ -11,6 +11,7 @@ export class NotesServices{
   constructor(private http: HttpClient) {
     this.getAllNotes();
   }
+
   public getData = (route: string) => {
     return this.http.get(this.createCompleteRoute(route, environment.apiUrl));
   }
@@ -21,6 +22,10 @@ export class NotesServices{
 
   public create = (route: string, body) => {
     return this.http.post(this.createCompleteRoute(route, environment.apiUrl), body, this.generateHeaders());
+  }
+
+  public update = (route: string, body) => {
+    return this.http.put(this.createCompleteRoute(route, environment.apiUrl), body, this.generateHeaders());
   }
 
   private generateHeaders = () => {

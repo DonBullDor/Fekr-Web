@@ -25,6 +25,10 @@ export class PlanEtudeService {
     return this.http.post(this.createCompleteRoute(route, environment.apiUrl), body, this.generateHeaders());
   }
 
+  public update = (route: string, body) => {
+    return this.http.put(this.createCompleteRoute(route, environment.apiUrl), body, this.generateHeaders());
+  }
+
   private generateHeaders = () => {
     return {
       headers: new HttpHeaders({'Content-Type': 'application/json'})

@@ -29,8 +29,8 @@ export class EnseignantCreateComponent implements OnInit {
       password: new FormControl('', [Validators.required, Validators.maxLength(60)]),
       type: new FormControl('', [Validators.required, Validators.maxLength(60)]),
       etat: new FormControl('', [Validators.required, Validators.maxLength(60)]),
-      tel1: new FormControl('', [Validators.required, Validators.maxLength(60)]),
-      tel2: new FormControl('', [Validators.required, Validators.maxLength(60)]),
+      tel1: new FormControl('', [Validators.required]),
+      tel2: new FormControl('', [Validators.required]),
     });
   }
 
@@ -43,6 +43,7 @@ export class EnseignantCreateComponent implements OnInit {
   }
 
   public createEnseignant = (etudiantFormValue) => {
+    console.log(etudiantFormValue);
     if (this.enseignantForm.valid) {
       this.executeEnseignantCreation(etudiantFormValue);
     }
@@ -61,7 +62,7 @@ export class EnseignantCreateComponent implements OnInit {
       etat: enseignantFormValue.etat
     };
 
-    const apiUrl = 'api/Enseignant';
+    const apiUrl = 'api/Enseignants';
     this.repo.create(apiUrl, enseignant)
       .subscribe(res => {
           // this is temporary, until we create our dialogs

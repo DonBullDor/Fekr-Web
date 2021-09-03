@@ -1,1 +1,80 @@
 <p>enseignant-update works!</p>
+
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%">
+    <mat-card-title>Create a new enseignant</mat-card-title>
+    <form [formGroup]="enseignantForm" autocomplete="off" novalidate (ngSubmit)="updateEnseignant(enseignantForm.value)" fxLayout="column wrap"
+          fxLayoutAlign="center center" fxLayoutGap="10px">
+      <mat-card-content>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Enseignant ID" formControlName="id" id="id">
+          <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('id', 'required')">ID is required</mat-error>
+          <mat-error *ngIf="hasError('id', 'maxlength')">You have more than 60 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="Nom" formControlName="nom" id="nom">
+          <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('nom', 'required')">Nom is required</mat-error>
+          <mat-error *ngIf="hasError('nom', 'maxlength')">You have more than 60 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="Prenom" formControlName="prenom" id="prenom">
+          <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('prenom', 'required')">Prenom is required</mat-error>
+          <mat-error *ngIf="hasError('prenom', 'maxlength')">You have more than 60 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="email" placeholder="Email" formControlName="email" id="email">
+          <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('email', 'required')">Email is required</mat-error>
+          <mat-error *ngIf="hasError('email', 'maxlength')">You have more than 60 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="Password" formControlName="password" id="password">
+          <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('password', 'required')">Password is required</mat-error>
+          <mat-error *ngIf="hasError('password', 'maxlength')">You have more than 60 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="Type" formControlName="type" id="type">
+          <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('type', 'required')">Type is required</mat-error>
+          <mat-error *ngIf="hasError('type', 'maxlength')">You have more than 100 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="Etat" formControlName="etat" id="etat">
+          <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('etat', 'required')">Etat is required</mat-error>
+          <mat-error *ngIf="hasError('etat', 'maxlength')">You have more than 100 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="number" placeholder="Tel1" formControlName="tel1" id="tel1">
+          <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('tel1', 'required')">Tel1 is required</mat-error>
+          <mat-error *ngIf="hasError('tel1', 'maxlength')">You have more than 100 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="number" placeholder="Tel2" formControlName="tel2" id="tel2">
+          <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('tel2', 'required')">Tel2 is required</mat-error>
+          <mat-error *ngIf="hasError('tel2', 'maxlength')">You have more than 100 characters</mat-error>
+        </mat-form-field>
+
+      </mat-card-content>
+      <mat-card-actions align="center">
+        <button type="submit" mat-raised-button color="primary">Update</button>
+        <!--        <button type="submit" mat-raised-button color="primary" [disabled]="!enseignantForm.valid">Create</button>-->
+        <button type="button" mat-raised-button color="warn" (click)="redirectToEnseignantList()">Cancel</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</section>

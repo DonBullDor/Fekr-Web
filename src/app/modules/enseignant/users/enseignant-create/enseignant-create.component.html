@@ -2,7 +2,7 @@
 
 <section fxLayout="row wrap" fxLayoutAlign="center center">
   <mat-card fxFlex="500px" fxFlex.xs="100%">
-    <mat-card-title>Create a new admin</mat-card-title>
+    <mat-card-title>Create a new enseignant</mat-card-title>
     <form [formGroup]="enseignantForm" autocomplete="off" novalidate (ngSubmit)="createEnseignant(enseignantForm.value)" fxLayout="column wrap"
           fxLayoutAlign="center center" fxLayoutGap="10px">
       <mat-card-content>
@@ -56,14 +56,14 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput type="number" placeholder="Tel1" formControlName="etat" id="tel1">
+          <input matInput type="number" placeholder="Tel1" formControlName="tel1" id="tel1">
           <mat-hint align="end">Not more then 100 characters long.</mat-hint>
           <mat-error *ngIf="hasError('tel1', 'required')">Tel1 is required</mat-error>
           <mat-error *ngIf="hasError('tel1', 'maxlength')">You have more than 100 characters</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput type="number" placeholder="Tel2" formControlName="etat" id="tel2">
+          <input matInput type="number" placeholder="Tel2" formControlName="tel2" id="tel2">
           <mat-hint align="end">Not more then 100 characters long.</mat-hint>
           <mat-error *ngIf="hasError('tel2', 'required')">Tel2 is required</mat-error>
           <mat-error *ngIf="hasError('tel2', 'maxlength')">You have more than 100 characters</mat-error>
@@ -71,7 +71,8 @@
 
       </mat-card-content>
       <mat-card-actions align="center">
-        <button mat-raised-button color="primary" [disabled]="!enseignantForm.valid">Create</button>
+        <button type="submit" mat-raised-button color="primary">Create</button>
+<!--        <button type="submit" mat-raised-button color="primary" [disabled]="!enseignantForm.valid">Create</button>-->
         <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
       </mat-card-actions>
     </form>

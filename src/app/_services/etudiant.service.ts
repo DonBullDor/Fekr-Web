@@ -25,6 +25,10 @@ export class EtudiantService {
     return this.http.post(this.createCompleteRoute(route, environment.apiUrl), body, this.generateHeaders());
   }
 
+  public update = (route: string, body) => {
+    return this.http.put(this.createCompleteRoute(route, environment.apiUrl), body, this.generateHeaders());
+  }
+
   getEtudiant(id: string): void {
     this.http.get<Etudiant>('http://localhost:5000/api/Etudiants/' + id)
       .subscribe(p => this.etudiant = p);

@@ -25,6 +25,10 @@ export class ModuleService {
     return this.http.post(this.createCompleteRoute(route, environment.apiUrl), body, this.generateHeaders());
   }
 
+  public update = (route: string, body) => {
+    return this.http.put(this.createCompleteRoute(route, environment.apiUrl), body, this.generateHeaders());
+  }
+
   getModuleById(id: string): void {
     this.http.get<Module>('http://localhost:5000/api/Modules/' + id)
       .subscribe(p => this.module = p);

@@ -25,6 +25,10 @@ export class ClasseService {
     return this.http.post(this.createCompleteRoute(route, environment.apiUrl), body, this.generateHeaders());
   }
 
+  public update = (route: string, body) => {
+    return this.http.put(this.createCompleteRoute(route, environment.apiUrl), body, this.generateHeaders());
+  }
+
   getClasseById(id: string): void {
     this.http.get<Classe>('http://localhost:5000/api/Classes/' + id)
       .subscribe(p => this.classe = p);

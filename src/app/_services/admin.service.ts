@@ -24,6 +24,10 @@ export class AdminService {
     return this.http.post(this.createCompleteRoute(route, environment.apiUrl), body, this.generateHeaders());
   }
 
+  public update = (route: string, body) => {
+    return this.http.put(this.createCompleteRoute(route, environment.apiUrl), body, this.generateHeaders());
+  }
+
   getAdminById(id: string): void {
     this.http.get<Admin>('http://localhost:5000/api/Admin/' + id)
       .subscribe(p => this.admin = p);

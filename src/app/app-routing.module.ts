@@ -39,6 +39,13 @@ import {SaisieNotesComponent} from './modules/enseignant/saisie-notes/saisie-not
 import {AdminCreateComponent} from './modules/admin/users/admin-create/admin-create.component';
 import {EtudiantCreateComponent} from './modules/etudiant/users/etudiant-create/etudiant-create.component';
 import {EnseignantCreateComponent} from './modules/enseignant/users/enseignant-create/enseignant-create.component';
+import {ModuleCreateComponent} from './modules/module/module-create/module-create.component';
+import {AdminUpdateComponent} from './modules/admin/users/admin-update/admin-update.component';
+import {ClasseUpdateComponent} from './modules/classe/classe-update/classe-update.component';
+import {EnseignantUpdateComponent} from './modules/enseignant/users/enseignant-update/enseignant-update.component';
+import {EtudiantUpdateComponent} from './modules/etudiant/users/etudiant-update/etudiant-update.component';
+import {ModuleUpdateComponent} from './modules/module/module-update/module-update.component';
+import {PlanEtudeUpdateComponent} from './modules/admin/plan-etude/plan-etude-update/plan-etude-update.component';
 // import { } from '../app/modules/admin/'
 
 const routes: Routes = [
@@ -52,24 +59,31 @@ const routes: Routes = [
   {path: 'admin', component: AdminComponent},
   {path: 'admin-list', component: AdminListComponent},
   {path: 'admin-detail/:id', component: AdminDetailComponent},
+  {path: 'admin-update/:id', component: AdminUpdateComponent},
   {path: 'admin-create', component: AdminCreateComponent},
   {path: 'classe', component: ClasseComponent},
   {path: 'classe-list', component: ClasseListComponent},
   {path: 'classe-detail/:id', component: ClasseDetailComponent},
+  {path: 'classe-update/:id', component: ClasseUpdateComponent},
   {path: 'enseignant', component: EnseignantComponent},
   {path: 'enseignant-list', component: EnseignantListComponent},
   {path: 'enseignant-detail/:id', component: EnseignantDetailComponent},
   {path: 'enseignant-create', component: EnseignantCreateComponent},
+  {path: 'enseignant-update/:id', component: EnseignantUpdateComponent},
   {path: 'etudiant', component: EtudiantComponent},
   {path: 'etudiant-create', component: EtudiantCreateComponent},
   {path: 'etudiant-list', component: EtudiantListComponent},
   {path: 'etudiant-detail/:id', component: EtudiantDetailComponent},
+  {path: 'etudiant-update/:id', component: EtudiantUpdateComponent},
   {path: 'module', component: ModuleComponent},
   {path: 'modules-list', component: ModuleListComponent},
   {path: 'module-detail/:id', component: ModuleDetailComponent},
+  {path: 'module-create', component: ModuleCreateComponent},
+  {path: 'module-update/:id', component: ModuleUpdateComponent},
   {path: 'plan-etude-list', component: PlanEtudeListComponent},
   {path: 'plan-etude-create', component: PlanEtudeCreateComponent},
   {path: 'plan-etude-detail/:id', component: PlanEtudeDetailComponent},
+  {path: 'plan-etude-update/:id', component: PlanEtudeUpdateComponent},
   {path: 'notes-list', component: SaisieNotesComponent},
   {path: 'emploi-du-temps-create', component: EmploiDuTempCreateComponent},
   {path: 'emploi-du-temps-list', component: EmploiDuTempListComponent},

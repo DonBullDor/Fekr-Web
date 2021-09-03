@@ -1,4 +1,47 @@
 <p>plan-etude-create works!</p>
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%">
+    <mat-card-title>Create a new admin</mat-card-title>
+    <form [formGroup]="planEtudeForm" autocomplete="off" novalidate (ngSubmit)="createPlanEtude(planEtudeForm.value)" fxLayout="column wrap"
+          fxLayoutAlign="center center" fxLayoutGap="10px">
+      <mat-card-content>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Code module" formControlName="codeModule" id="codeModule">
+          <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('codeModule', 'required')">Code module is required</mat-error>
+          <mat-error *ngIf="hasError('codeModule', 'maxlength')">You have more than 60 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="Code classe" formControlName="codeClasse" id="codeClasse">
+          <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('codeClasse', 'required')">Code classe is required</mat-error>
+          <mat-error *ngIf="hasError('codeClasse', 'maxlength')">You have more than 100 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="Annee" formControlName="annee" id="annee">
+          <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('annee', 'required')">Code classe is required</mat-error>
+          <mat-error *ngIf="hasError('annee', 'maxlength')">You have more than 100 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="ID Enseignant" formControlName="idEnseignant" id="idEnseignant">
+          <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('idEnseignant', 'required')">ID Enseignant classe is required</mat-error>
+          <mat-error *ngIf="hasError('idEnseignant', 'maxlength')">You have more than 100 characters</mat-error>
+        </mat-form-field>
+
+      </mat-card-content>
+      <mat-card-actions align="center">
+        <button mat-raised-button color="primary" [disabled]="!planEtudeForm.valid">Create</button>
+        <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</section>
+
 
 <!--<section fxLayout="row wrap" fxLayoutAlign="center center">-->
 <!--  <mat-card fxFlex="500px" fxFlex.xs="100%">-->

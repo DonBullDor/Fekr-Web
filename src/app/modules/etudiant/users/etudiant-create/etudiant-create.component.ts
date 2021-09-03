@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {EtudiantService} from '../../../../_services/etudiant.service';
 import {ErrorHandlerService} from '../../../../_services/error-handler.service';
@@ -18,7 +18,8 @@ export class EtudiantCreateComponent implements OnInit {
   constructor(private repo: EtudiantService,
               private errorHandlerService: ErrorHandlerService,
               private router: Router,
-              private location: Location) { }
+              private location: Location) {
+  }
 
   ngOnInit(): void {
     this.etudiantForm = new FormGroup({
@@ -50,6 +51,7 @@ export class EtudiantCreateComponent implements OnInit {
   }
 
   public createEtudiant = (etudiantFormValue) => {
+    console.log(etudiantFormValue);
     if (this.etudiantForm.valid) {
       this.executeEtudiantCreation(etudiantFormValue);
     }
@@ -58,8 +60,8 @@ export class EtudiantCreateComponent implements OnInit {
   private executeEtudiantCreation = (etudiantFormValue) => {
     const etudiant: Etudiant = {
       idEt: etudiantFormValue.id,
-      nomEt : etudiantFormValue.nom,
-      pnomEt : etudiantFormValue.prenom,
+      nomEt: etudiantFormValue.nom,
+      pnomEt: etudiantFormValue.prenom,
       eMailEt: etudiantFormValue.email,
       anneeEntreeEspEt: etudiantFormValue.anneeEntree,
       classeCouranteEt: etudiantFormValue.classeCourant,
@@ -75,7 +77,7 @@ export class EtudiantCreateComponent implements OnInit {
       pwdParent: etudiantFormValue.passwordParent
     };
 
-    const apiUrl = 'api/Etudiant';
+    const apiUrl = 'api/Etudiants';
     this.repo.create(apiUrl, etudiant)
       .subscribe(res => {
           // this is temporary, until we create our dialogs
@@ -88,7 +90,7 @@ export class EtudiantCreateComponent implements OnInit {
       );
   }
 
-  public redirectToAdminList(): void {
+  public redirectToEtudiantList(): void {
     this.router.navigate(['/etudiant-list']);
   }
 }
