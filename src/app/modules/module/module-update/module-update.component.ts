@@ -4,6 +4,7 @@ import {Module} from '../../../_models/module.model';
 import {ErrorHandlerService} from '../../../_services/error-handler.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ModuleService} from '../../../_services/module.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-module-update',
@@ -61,7 +62,7 @@ export class ModuleUpdateComponent implements OnInit {
     const apiUrl = `api/Modules/${this.module.codeModule}`;
     this.repo.update(apiUrl, this.module)
       .subscribe(res => {
-          $('#successModal').modal();
+          ($('#successModal')as any).modal();
         },
         (error => {
           this.errorHandler.handleError(error);

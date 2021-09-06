@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient , HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import {Societe} from '../_models/societe.model';
+import {Observable} from "rxjs";
 
 @Injectable()
 export class PlanEtudeService {
@@ -48,6 +49,10 @@ export class PlanEtudeService {
   getAnneeDebut(annee: string): void {
     this.http.get<Societe>('http://localhost:5000/api/Societe/' + annee)
       .subscribe(p => this.annee = p);
+  }
+
+  getAnnees(): Observable<Societe[]>{
+    return this.http.get<Societe[]>('http://localhost:5000/api/Societes/');
   }
 
   createPlanEtude(planEtude: PlanEtude): void {

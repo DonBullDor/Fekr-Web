@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AdminService} from '../../../../_services/admin.service';
 import {ErrorHandlerService} from '../../../../_services/error-handler.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-admin-update',
@@ -11,6 +12,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./admin-update.component.css']
 })
 export class AdminUpdateComponent implements OnInit {
+
   public errorMessage = '';
   public admin: Admin;
   public adminForm: FormGroup;
@@ -47,6 +49,7 @@ export class AdminUpdateComponent implements OnInit {
   }
 
   public updateAdmin = (adminFormValue) => {
+    console.log(adminFormValue);
     if (this.adminForm.valid) {
       this.executeAdminUpdate(adminFormValue);
     }
@@ -58,7 +61,7 @@ export class AdminUpdateComponent implements OnInit {
     const apiUrl = `api/Admin/${this.admin.idDecid}`;
     this.repo.update(apiUrl, this.admin)
       .subscribe(res => {
-          $('#successModal').modal();
+          ($('#successModal') as any).modal();
         },
         (error => {
           this.errorHandler.handleError(error);

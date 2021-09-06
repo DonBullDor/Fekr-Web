@@ -2,15 +2,16 @@ import { Module } from '../_models/module.model';
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class ModuleService {
   module: Module;
-  modules: Module[];
+  public modules: Module[];
 
   constructor(private http: HttpClient) {
-    this.getAllModules();
-    this.getModuleById('FKR-SV INF');
+    // this.getAllModules();
+    // this.getModuleById('FKR-SV INF');
   }
 
   public getData = (route: string) => {
@@ -37,6 +38,10 @@ export class ModuleService {
   getAllModules(): void {
     this.http.get<Module[]>('http://localhost:5000/api/Modules')
       .subscribe(p => this.modules = p);
+  }
+
+  getAllModulesTest(): Observable<Module[]>{
+    return this.http.get<Module[]>('http://localhost:5000/api/Modules');
   }
 
   createModule(module: Module): void {

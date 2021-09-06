@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {first} from 'rxjs/operators';
 
-import { AuthenticationService } from '../../_services';
+import {AuthenticationService} from '../../_services';
 
 interface Users {
   value: string;
@@ -23,11 +23,12 @@ export class LoginComponent implements OnInit {
   error = '';
 
   usersType: Users[] = [
-    { value: 'etudiant', viewValue: 'Etudiant' },
-    { value: 'admin', viewValue: 'Admin' },
-    { value: 'enseignant', viewValue: 'Enseignant' },
-    { value: 'parent', viewValue: 'Parent' }
+    {value: 'etudiant', viewValue: 'Etudiant'},
+    {value: 'admin', viewValue: 'Admin'},
+    {value: 'enseignant', viewValue: 'Enseignant'},
+    {value: 'parent', viewValue: 'Parent'}
   ];
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -40,7 +41,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -49,8 +50,11 @@ export class LoginComponent implements OnInit {
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.loginForm.controls; }
-  onSubmit() {
+  get f() {
+    return this.loginForm.controls;
+  }
+
+  onSubmit(): void {
     console.log('selected value after submit : ', this.selectedRole);
     this.submitted = true;
 
@@ -65,37 +69,33 @@ export class LoginComponent implements OnInit {
     // }
 
     switch (this.selectedRole) {
-      case 'etudiant':
-        {
-          this.authenticateEtudiant();
-          break;
-        }
-      case 'enseignant':
-        {
-          this.authenticateEnseignant();
-          break;
-        }
-      case 'admin':
-        {
-          this.authenticateAdmin();
-          break;
-        }
-      case 'parent':
-        {
-          this.authenticateParent();
-          break;
-        }
+      case 'etudiant': {
+        this.authenticateEtudiant();
+        break;
+      }
+      case 'enseignant': {
+        this.authenticateEnseignant();
+        break;
+      }
+      case 'admin': {
+        this.authenticateAdmin();
+        break;
+      }
+      case 'parent': {
+        this.authenticateParent();
+        break;
+      }
     }
   }
 
-  authenticateEtudiant() {
+  authenticateEtudiant(): void {
     console.log('redirect to etudiant space');
     this.authenticationService.login(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe({
         next: () => {
           // get return url from route parameters or default to '/'
-          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+          const returnUrl = this.route.snapshot.queryParams.returnUrl || '/etudiant';
           this.router.navigate([returnUrl]);
         },
         error: error => {
@@ -105,14 +105,14 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  authenticateEnseignant() {
+  authenticateEnseignant(): void {
     console.log('redirect to enseignant space');
     this.authenticationService.login(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe({
         next: () => {
           // get return url from route parameters or default to '/'
-          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+          const returnUrl = this.route.snapshot.queryParams.returnUrl || '/enseignant';
           this.router.navigate([returnUrl]);
         },
         error: error => {
@@ -122,14 +122,14 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  authenticateAdmin() {
+  authenticateAdmin(): void {
     console.log('redirect to admin space');
     this.authenticationService.login(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe({
         next: () => {
           // get return url from route parameters or default to '/'
-          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+          const returnUrl = this.route.snapshot.queryParams.returnUrl || '/admin-list';
           this.router.navigate([returnUrl]);
         },
         error: error => {
@@ -139,14 +139,14 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  authenticateParent() {
+  authenticateParent(): void {
     console.log('redirect to parent space');
     this.authenticationService.login(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe({
         next: () => {
           // get return url from route parameters or default to '/'
-          const returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+          const returnUrl = this.route.snapshot.queryParams.returnUrl || '/parent';
           this.router.navigate([returnUrl]);
         },
         error: error => {

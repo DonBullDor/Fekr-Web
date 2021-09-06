@@ -5,6 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {PlanEtude} from '../../../../_models/plan-etude.model';
 
+declare var $: any;
+
 @Component({
   selector: 'app-plan-etude-update',
   templateUrl: './plan-etude-update.component.html',
@@ -14,6 +16,7 @@ export class PlanEtudeUpdateComponent implements OnInit {
   public errorMessage = '';
   public planEtude: PlanEtude;
   public planEtudeForm: FormGroup;
+  public currentYear = new Date().getFullYear();
 
   constructor(private repo: PlanEtudeService,
               private errorHandler: ErrorHandlerService,
@@ -23,9 +26,9 @@ export class PlanEtudeUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.planEtudeForm = new FormGroup({
-      codeModule: new FormControl('', [Validators.required, Validators.maxLength(60)]),
+      codeModule: new FormControl('', [Validators.required, Validators.pattern(/^[1-9][A-Z][A-Z][1-9]$/), Validators.maxLength(60)]),
       codeClasse: new FormControl('', [Validators.required, Validators.maxLength(60)]),
-      annee: new FormControl('', [Validators.required, Validators.maxLength(60)]),
+      annee: new FormControl('', [Validators.required, Validators.min(this.currentYear),  Validators.maxLength(60)]),
       idEnseignant: new FormControl('', [Validators.required, Validators.maxLength(60)])
     });
 

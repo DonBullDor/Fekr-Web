@@ -2,6 +2,7 @@ import { Classe } from '../_models/classe.model';
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class ClasseService {
@@ -37,6 +38,10 @@ export class ClasseService {
   getAllClasses(): void {
     this.http.get<Classe[]>('http://localhost:5000/api/Classes')
       .subscribe(p => this.classes = p);
+  }
+
+  getAllClassesTest(): Observable<Classe[]>{
+    return this.http.get<Classe[]>('http://localhost:5000/api/Classes');
   }
 
   createClasse(classe: Classe): void {

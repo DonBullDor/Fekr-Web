@@ -1,10 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ErrorHandlerService} from 'src/app/_services/error-handler.service';
 import {PlanEtudeService} from 'src/app/_services/plan-etude.service';
 import {Location} from '@angular/common';
 import {PlanEtude} from '../../../../_models/plan-etude.model';
+import {Module} from '../../../../_models/module.model';
+import {ModuleService} from '../../../../_services/module.service';
+import {Classe} from '../../../../_models/classe.model';
+import {ClasseService} from '../../../../_services/classe.service';
+import {MatSelectChange} from "@angular/material/select";
+import {EnseignantService} from "../../../../_services/enseignant.service";
+import {Enseignant} from "../../../../_models/enseignant.model";
+import {Societe} from "../../../../_models/societe.model";
 
 @Component({
   selector: 'app-plan-etude-create',
@@ -14,20 +22,43 @@ import {PlanEtude} from '../../../../_models/plan-etude.model';
 export class PlanEtudeCreateComponent implements OnInit {
   public errorMessage = '';
   public planEtudeForm: FormGroup;
-
-  constructor(private repo: PlanEtudeService,
+  public modules: Module[] = [];
+  public classes: Classe[] = [];
+  public enseignants: Enseignant[] = [];
+  public annees: Societe[] = [];
+  constructor(private repoEns: EnseignantService,
+              private repoClasse: ClasseService,
+              private repoModule: ModuleService,
+              private repo: PlanEtudeService,
               private errorHandler: ErrorHandlerService,
               private router: Router,
               public location: Location) {
   }
 
   ngOnInit(): void {
+    this.repoModule.getAllModulesTest().subscribe((modules) => {
+      this.modules = modules;
+    });
+    this.repoClasse.getAllClassesTest().subscribe((classes) => {
+      this.classes = classes;
+    });
+    this.repo.getAnnees().subscribe((societe) => {
+      this.annees = societe;
+    });
+    this.repoEns.getAllEnseignantsTest().subscribe((enseignants) => {
+      this.enseignants = enseignants;
+    });
     this.planEtudeForm = new FormGroup({
-      codeModule: new FormControl('', [Validators.required, Validators.maxLength(60)]),
+      codeModule: new FormControl('', [Validators.required, Validators.pattern(/\d{3}\w{3}\d{4}/gm), Validators.maxLength(60)]),
       codeClasse: new FormControl('', [Validators.required, Validators.maxLength(60)]),
       annee: new FormControl('', [Validators.required, Validators.maxLength(60)]),
       idEnseignant: new FormControl('', [Validators.required, Validators.maxLength(60)])
     });
+  }
+
+  public handleChange = (e: MatSelectChange) => {
+    console.log('Change Event', e);
+    this.repoModule.getAllModules();
   }
 
   public hasError = (controlName: string, errorName: string) => {
@@ -40,9 +71,9 @@ export class PlanEtudeCreateComponent implements OnInit {
 
   public createPlanEtude = (planEtudeFormValue) => {
     console.log(planEtudeFormValue);
-    if (this.planEtudeForm.valid) {
-      this.executePlanEtudeCreation(planEtudeFormValue);
-    }
+    // if (this.planEtudeForm.valid) {
+    this.executePlanEtudeCreation(planEtudeFormValue);
+    // }
   }
 
   private executePlanEtudeCreation = (planEtudeFormValue) => {

@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { ErrorHandlerService } from 'src/app/_services/error-handler.service';
-import { PlanEtudeService } from '../../../../_services/plan-etude.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { PlanEtude } from '../../../../_models/plan-etude.model';
+import {ErrorHandlerService} from 'src/app/_services/error-handler.service';
+import {PlanEtudeService} from '../../../../_services';
+import {MatTableDataSource} from '@angular/material/table';
+import {PlanEtude} from '../../../../_models/plan-etude.model';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 
@@ -18,10 +18,12 @@ export class PlanEtudeListComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(private repo: PlanEtudeService,
               private activeRoute: ActivatedRoute,
               private router: Router,
-              private errorService: ErrorHandlerService) { }
+              private errorService: ErrorHandlerService) {
+  }
 
   ngOnInit(): void {
     this.getAllPlansEtudes();

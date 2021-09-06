@@ -4,6 +4,7 @@ import {Etudiant} from '../../../../_models/etudiant.model';
 import {ErrorHandlerService} from '../../../../_services/error-handler.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {EtudiantService} from '../../../../_services/etudiant.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-etudiant-update',
@@ -26,7 +27,7 @@ export class EtudiantUpdateComponent implements OnInit {
       id: new FormControl('', [Validators.required, Validators.maxLength(60)]),
       nom: new FormControl('', [Validators.required, Validators.maxLength(100)]),
       prenom: new FormControl('', [Validators.required, Validators.maxLength(100)]),
-      email: new FormControl('', [Validators.required, Validators.maxLength(100)]),
+      email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(100)]),
       anneeEntree: new FormControl('', [Validators.required, Validators.maxLength(100)]),
       classeCourant: new FormControl('', [Validators.required, Validators.maxLength(100)]),
       emailParent: new FormControl('', [Validators.required, Validators.maxLength(100)]),
@@ -87,7 +88,7 @@ export class EtudiantUpdateComponent implements OnInit {
     const apiUrl = `api/Admin/${this.etudiant.idEt}`;
     this.repo.update(apiUrl, this.etudiant)
       .subscribe(res => {
-          $('#successModal').modal();
+          ($('#successModal')as any).modal();
         },
         (error => {
           this.errorHandler.handleError(error);

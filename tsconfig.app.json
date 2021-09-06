@@ -10,7 +10,7 @@
   "files": [
     "src/main.ts",
     "src/polyfills.ts",
-    "node_modules/@types/jquery/misc.d.ts"
+    "../../../Fekr/Fekr/ClientApp/node_modules/@types/jquery/dist/jquery.slim.d.ts"
   ],
   "include": ["src/**/*.d.ts"]
 }

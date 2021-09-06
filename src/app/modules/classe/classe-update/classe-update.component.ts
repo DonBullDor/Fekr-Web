@@ -5,6 +5,8 @@ import {ErrorHandlerService} from '../../../_services/error-handler.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ClasseService} from '../../../_services/classe.service';
 
+declare var $: any;
+
 @Component({
   selector: 'app-classe-update',
   templateUrl: './classe-update.component.html',
