@@ -63,6 +63,7 @@ export class AuthenticationService {
         console.log(user);
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentUser', JSON.stringify(user));
+        localStorage.setItem('currentRole', 'etudiant');
         this.currentUserSubject.next(user);
         return user;
       }));
@@ -74,6 +75,7 @@ export class AuthenticationService {
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentAdmin', JSON.stringify(user));
+        localStorage.setItem('currentRole', 'admin');
         this.currentAdminSubject.next(user);
         return user;
       }));
@@ -85,6 +87,7 @@ export class AuthenticationService {
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentAdmin', JSON.stringify(user));
+        localStorage.setItem('currentRole', 'enseignant');
         this.currentAdminSubject.next(user);
         return user;
       }));
@@ -96,6 +99,7 @@ export class AuthenticationService {
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentAdmin', JSON.stringify(user));
+        localStorage.setItem('currentRole', 'parent');
         this.currentAdminSubject.next(user);
         return user;
       }));
@@ -104,21 +108,25 @@ export class AuthenticationService {
   logout(): void {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('currentRole');
     this.currentUserSubject.next(null);
   }
 
   logoutAdmin(): void {
     localStorage.removeItem('currentAdmin');
+    localStorage.removeItem('currentRole');
     this.currentAdminSubject.next(null);
   }
 
   logoutEnseignant(): void {
     localStorage.removeItem('currentEnseignant');
+    localStorage.removeItem('currentRole');
     this.currentEnseignantSubject.next(null);
   }
 
   logoutParent(): void {
     localStorage.removeItem('currentParent');
+    localStorage.removeItem('currentRole');
     this.currentParentSubject.next(null);
   }
 }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient , HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import {Societe} from '../_models/societe.model';
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class PlanEtudeService {

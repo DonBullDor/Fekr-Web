@@ -78,7 +78,7 @@ export class PlanEtudeCreateComponent implements OnInit {
 
   private executePlanEtudeCreation = (planEtudeFormValue) => {
     const plan: PlanEtude = {
-      codeModule: planEtudeFormValue.id,
+      codeModule: planEtudeFormValue.codeModule,
       codeCl: planEtudeFormValue.codeClasse,
       anneeDeb: planEtudeFormValue.annee,
       idEns: planEtudeFormValue.idEnseignant
