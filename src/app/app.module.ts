@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModelModule } from './_models/model.module';
 
@@ -32,11 +32,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatStepperModule } from '@angular/material/stepper';
-
-// used to create fake backend
-// import { fakeBackendProvider } from '../app/_helpers/fake-backend';
-import { JwtInterceptor } from '../app/_helpers/jwt.interceptor';
-import { ErrorInterceptor } from '../app/_helpers/error.interceptor';
 
 // Component imports
 import { EtudiantComponent } from './modules/etudiant/etudiant.component';

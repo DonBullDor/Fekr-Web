@@ -12,11 +12,11 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const currentUser = this.authenticationService.currentUserValue;
-    const currentAdmin = this.authenticationService.currentAdminValue;
+    // const currentAdmin = this.authenticationService.currentAdminValue;
     const currentEnseignant = this.authenticationService.currentEnseignantValue;
     const currentParent = this.authenticationService.currentParentValue;
 
-    if (currentUser || currentAdmin || currentEnseignant || currentParent) {
+    if (currentUser || /*currentAdmin ||*/ currentEnseignant || currentParent) {
       // logged in so return true
       return true;
     }

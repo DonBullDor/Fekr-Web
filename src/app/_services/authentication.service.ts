@@ -4,7 +4,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
-import { User } from '../_models/user';
 import { Etudiant } from '../_models/etudiant.model';
 import { Admin } from '../_models/admin.model';
 import { Enseignant } from '../_models/enseignant.model';

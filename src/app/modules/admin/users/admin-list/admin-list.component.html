@@ -9,8 +9,7 @@
   </div>
 </div>
 <p *ngIf="!admins">
-  <!-- <em>Loading...</em> -->
-  <mat-spinner></mat-spinner>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </p>
 <mat-card-content>
   <table mat-table #table [dataSource]="dataSource" class="table-striped mat-elevation-z8" [hidden]="!admins" matSort>

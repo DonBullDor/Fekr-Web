@@ -5,13 +5,12 @@
     <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
   <div>
-    <a [routerLink]="['/enseignant-create']" mat-button color="primary">Create Admin</a>
+    <a [routerLink]="['/enseignant-create']" mat-button color="primary">Create Enseignant</a>
   </div>
 </div>
 
 <p *ngIf="!enseignants">
-  <!-- <em>Loading...</em> -->
-  <mat-spinner></mat-spinner>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </p>
 
 <mat-card-content>

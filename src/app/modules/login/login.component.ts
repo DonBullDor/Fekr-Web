@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
 
 import {AuthenticationService} from '../../_services';
@@ -37,7 +37,16 @@ export class LoginComponent implements OnInit {
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/etudiant']);
+    }
+    else if (this.authenticationService.currentAdminValue) {
+      this.router.navigate(['/admin']);
+    }
+    else if (this.authenticationService.currentEnseignantValue) {
+      this.router.navigate(['/enseignant']);
+    }
+    else if (this.authenticationService.currentParentValue) {
+      this.router.navigate(['/parent']);
     }
   }
 
@@ -50,7 +59,7 @@ export class LoginComponent implements OnInit {
   }
 
   // convenience getter for easy access to form fields
-  get f() {
+  get form() {
     return this.loginForm.controls;
   }
 
@@ -90,7 +99,7 @@ export class LoginComponent implements OnInit {
 
   authenticateEtudiant(): void {
     console.log('redirect to etudiant space');
-    this.authenticationService.login(this.f.username.value, this.f.password.value)
+    this.authenticationService.login(this.form.username.value, this.form.password.value)
       .pipe(first())
       .subscribe({
         next: () => {
@@ -107,7 +116,7 @@ export class LoginComponent implements OnInit {
 
   authenticateEnseignant(): void {
     console.log('redirect to enseignant space');
-    this.authenticationService.login(this.f.username.value, this.f.password.value)
+    this.authenticationService.loginEnseignant(this.form.username.value, this.form.password.value)
       .pipe(first())
       .subscribe({
         next: () => {
@@ -124,7 +133,7 @@ export class LoginComponent implements OnInit {
 
   authenticateAdmin(): void {
     console.log('redirect to admin space');
-    this.authenticationService.login(this.f.username.value, this.f.password.value)
+    this.authenticationService.loginAdmin(this.form.username.value, this.form.password.value)
       .pipe(first())
       .subscribe({
         next: () => {
@@ -141,7 +150,7 @@ export class LoginComponent implements OnInit {
 
   authenticateParent(): void {
     console.log('redirect to parent space');
-    this.authenticationService.login(this.f.username.value, this.f.password.value)
+    this.authenticationService.loginParent(this.form.username.value, this.form.password.value)
       .pipe(first())
       .subscribe({
         next: () => {

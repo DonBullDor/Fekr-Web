@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { Etudiant } from 'src/app/_models/etudiant.model';
+import { UserService } from '../../_services';
 
-import { User } from '../../_models/user';
-import { UserService } from '../../_services/user.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,7 +15,7 @@ export class HomeComponent implements OnInit {
 
     constructor(private userService: UserService) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.loading = true;
         this.userService.getAll().pipe(first()).subscribe(users => {
             this.loading = false;

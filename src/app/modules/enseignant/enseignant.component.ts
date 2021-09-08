@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { EnseignantService } from '../../_services/enseignant.service';
-import { Enseignant } from '../../_models/enseignant.model';
+import {Component} from '@angular/core';
+import {EnseignantService} from '../../_services/enseignant.service';
+import {Enseignant} from '../../_models/enseignant.model';
 
 @Component({
   selector: 'app-enseignant',
@@ -9,13 +9,14 @@ import { Enseignant } from '../../_models/enseignant.model';
 })
 export class EnseignantComponent {
 
-  constructor(private repo: EnseignantService) { }
+  constructor(private repo: EnseignantService) {
+  }
 
-  get enseignants(): Enseignant[]{
+  get enseignants(): Enseignant[] {
     return this.repo.enseignants;
   }
 
-  get enseignant(){
+  get enseignant(): Enseignant {
     return this.repo.enseignant;
   }
 

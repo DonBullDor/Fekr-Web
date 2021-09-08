@@ -34,7 +34,6 @@ import {EmploiDuTempCreateComponent} from './modules/admin/emploi-du-temps/emplo
 import {EmploiDuTempListComponent} from './modules/admin/emploi-du-temps/emploi-du-temp-list/emploi-du-temp-list.component';
 import {EmploiDuTempUpdateComponent} from './modules/admin/emploi-du-temps/emploi-du-temp-update/emploi-du-temp-update.component';
 import {EmploiDuTempsDetailComponent} from './modules/admin/emploi-du-temps/emploi-du-temps-detail/emploi-du-temps-detail.component';
-import {EmploiDuTempCreate1Component} from './modules/admin/emploi-du-temps/emploi-du-temp-create1/emploi-du-temp-create1.component';
 import {SaisieNotesComponent} from './modules/enseignant/saisie-notes/saisie-notes.component';
 import {AdminCreateComponent} from './modules/admin/users/admin-create/admin-create.component';
 import {EtudiantCreateComponent} from './modules/etudiant/users/etudiant-create/etudiant-create.component';
@@ -46,6 +45,7 @@ import {EnseignantUpdateComponent} from './modules/enseignant/users/enseignant-u
 import {EtudiantUpdateComponent} from './modules/etudiant/users/etudiant-update/etudiant-update.component';
 import {ModuleUpdateComponent} from './modules/module/module-update/module-update.component';
 import {PlanEtudeUpdateComponent} from './modules/admin/plan-etude/plan-etude-update/plan-etude-update.component';
+import {AdminAuthGuard} from './_helpers/admin.auth.guard';
 // import { } from '../app/modules/admin/'
 
 const routes: Routes = [
@@ -57,7 +57,7 @@ const routes: Routes = [
   {path: 'login-enseignant', component: EnseignantLoginComponent},
   {path: 'login-admin', component: AdminLoginComponent},
   {path: 'admin', component: AdminComponent},
-  {path: 'admin-list', component: AdminListComponent},
+  {path: 'admin-list', component: AdminListComponent, canActivate: [AdminAuthGuard]},
   {path: 'admin-detail/:id', component: AdminDetailComponent},
   {path: 'admin-update/:id', component: AdminUpdateComponent},
   {path: 'admin-create', component: AdminCreateComponent},
