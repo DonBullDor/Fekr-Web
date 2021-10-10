@@ -70,7 +70,7 @@ export class AuthenticationService {
 
   loginAdmin(username: string, password: string): Observable<any> {
     console.log(username, 'data login', password);
-    return this.http.post<any>(`${environment.apiUrl}/Admins/authenticate`, { username, password })
+    return this.http.post<any>(`${environment.apiUrl}/api/AdminLogin/authenticate`, { username, password })
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentAdmin', JSON.stringify(user));
@@ -82,7 +82,7 @@ export class AuthenticationService {
 
   loginEnseignant(username: string, password: string): Observable<any> {
     console.log(username, 'data login', password);
-    return this.http.post<any>(`${environment.apiUrl}/enseignant/authenticate`, { username, password })
+    return this.http.post<any>(`${environment.apiUrl}/api/enseignants/authenticate`, { username, password })
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentAdmin', JSON.stringify(user));

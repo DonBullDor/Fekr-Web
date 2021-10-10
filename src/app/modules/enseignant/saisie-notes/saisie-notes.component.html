@@ -9,16 +9,54 @@
   <!-- <em>Loading...</em> -->
   <mat-spinner></mat-spinner>
 </p>
+<mat-card fxFlex="500px" fxFlex.xs="100%">
+  <mat-card-title>Filter</mat-card-title>
+  <form [formGroup]="filtersForm" autocomplete="off" novalidate (ngSubmit)="getNotesFromFilters(filtersForm.value)" fxLayout="column wrap"
+  fxLayoutAlign="center center" fxLayoutGap="10px">
+  <mat-card-content>
+    <mat-form-field>
+      <mat-select formControlName="codeClasse" id="codeClasse">
+        <mat-option *ngFor="let classe of classes" [value]="classe.codeCl">
+          {{classe.codeCl}}
+        </mat-option>
+      </mat-select>
+      <!--          <input matInput type="text" placeholder="Code classe" formControlName="codeClasse" id="codeClasse">-->
+      <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+      <mat-error *ngIf="hasError('codeClasse', 'required')">Code classe is required</mat-error>
+      <mat-error *ngIf="hasError('codeClasse', 'maxlength')">You have more than 100 characters</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select formControlName="annee" id="annee">
+        <mat-option *ngFor="let societe of annees" [value]="societe.anneeDeb">
+          {{societe.anneeDeb}}
+        </mat-option>
+      </mat-select>
+<!--          <input matInput type="text" placeholder="Annee" formControlName="annee" id="annee">-->
+      <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+      <mat-error *ngIf="hasError('annee', 'required')">Annee is required</mat-error>
+      <mat-error *ngIf="hasError('annee', 'maxlength')">You have more than 100 characters</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select formControlName="numSemestre" id="numSemestre">
+        <mat-option value="1">1</mat-option>
+        <mat-option value="2">2</mat-option>
+        <mat-option value="3">3</mat-option>
+      </mat-select>
+      <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+      <mat-error *ngIf="hasError('numSemestre', 'required')">numSemestre is required</mat-error>
+    </mat-form-field>
+
+</mat-card-content>
+  </form>
+</mat-card>
+
 <mat-card-content>
   <table mat-table #table [dataSource]="dataSource" class="table-striped mat-elevation-z8" [hidden]="!notes" matSort>
     <ng-container matColumnDef="idEtudiant">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> ID Etudiant </th>
       <td mat-cell *matCellDef="let element"> {{element.idEt}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="idEnseignant">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID Enseignant </th>
-      <td mat-cell *matCellDef="let element"> {{element.idEns}} </td>
     </ng-container>
 
     <ng-container matColumnDef="codeClasse">

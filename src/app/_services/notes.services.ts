@@ -39,6 +39,11 @@ export class NotesServices{
       .subscribe(p => this.note = p);
   }
 
+  getNotesByFilters(classe: string, idEnseignant: string, annee: string, numSemestre: number){
+    return this.http.get<Notes>('http://localhost:5000/api/Notes/GetNotesByClasseAndEnseignantAndAnneDebAndNumSemestre'+
+    classe + '/' + idEnseignant + '/' + annee + '/' + numSemestre
+    )
+  }
   getAllNotes(): void {
     this.http.get<Notes[]>('http://localhost:5000/api/Notes')
       .subscribe(p => this.notes = p);

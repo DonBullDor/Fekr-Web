@@ -1,7 +1,7 @@
-import { PlanEtude } from '../_models/plan-etude.model';
-import { Injectable } from '@angular/core';
-import { HttpClient , HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import {PlanEtude} from '../_models/plan-etude.model';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from 'src/environments/environment';
 import {Societe} from '../_models/societe.model';
 import {Observable} from 'rxjs';
 
@@ -14,10 +14,14 @@ export class PlanEtudeService {
   constructor(private http: HttpClient) {
     // this.getAllPlanEtudes();
   }
+
   public getData = (route: string) => {
     return this.http.get(this.createCompleteRoute(route, environment.apiUrl));
   }
 
+  public getDataByCriteria = (route: string, body) => {
+    return this.http.post(this.createCompleteRoute(route, environment.apiUrl), body, this.generateHeaders());
+  }
   private createCompleteRoute = (route: string, envAddress: string) => {
     return `${envAddress}/${route}`;
   }
@@ -41,6 +45,10 @@ export class PlanEtudeService {
       .subscribe(p => this.planEtude = p);
   }
 
+  generatePlan(): Observable<any> {
+    return this.http.get<any>('http://localhost:5000/api/PlanEtude/GeneratePlanEtude');
+  }
+
   getAllPlanEtudes(): void {
     this.http.get<PlanEtude[]>('http://localhost:5000/api/PlanEtude')
       .subscribe(p => this.planEtudes = p);
@@ -51,7 +59,7 @@ export class PlanEtudeService {
       .subscribe(p => this.annee = p);
   }
 
-  getAnnees(): Observable<Societe[]>{
+  getAnnees(): Observable<Societe[]> {
     return this.http.get<Societe[]>('http://localhost:5000/api/Societes/');
   }
 
@@ -83,7 +91,7 @@ export class PlanEtudeService {
   updatePlanEtude(id: string, changes: Map<string, any>): void {
     const patch = [];
     changes.forEach((value, key) =>
-      patch.push({ op: 'replace', path: key, value }));
+      patch.push({op: 'replace', path: key, value}));
     this.http.patch('/api/PlanEtude/' + id, patch)
       .subscribe(() => this.getAllPlanEtudes());
   }

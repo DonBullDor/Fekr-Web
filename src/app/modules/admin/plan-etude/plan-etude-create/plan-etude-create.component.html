@@ -1,137 +1,113 @@
-<p>plan-etude-create works!</p>
-<section fxLayout="row wrap" fxLayoutAlign="center center">
-  <mat-card fxFlex="500px" fxFlex.xs="100%">
-    <mat-card-title>Create a new admin</mat-card-title>
-    <form [formGroup]="planEtudeForm" autocomplete="off" novalidate (ngSubmit)="createPlanEtude(planEtudeForm.value)" fxLayout="column wrap"
-          fxLayoutAlign="center center" fxLayoutGap="10px">
-      <mat-card-content>
-        <mat-form-field>
-          <mat-select (selectionChange)="handleChange($event)" formControlName="codeClasse" id="codeClasse">
-            <mat-option *ngFor="let classe of classes" [value]="classe.codeCl">
-              {{classe.codeCl}}
-            </mat-option>
-          </mat-select>
-          <!--          <input matInput type="text" placeholder="Code classe" formControlName="codeClasse" id="codeClasse">-->
-          <mat-hint align="end">Not more then 100 characters long.</mat-hint>
-          <mat-error *ngIf="hasError('codeClasse', 'required')">Code classe is required</mat-error>
-          <mat-error *ngIf="hasError('codeClasse', 'maxlength')">You have more than 100 characters</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-select formControlName="codeModule" id="codeModule">
-            <mat-option *ngFor="let module of modules" [value]="module.codeModule">
-              {{module.codeModule}}
-            </mat-option>
-          </mat-select>
-<!--          <input matInput type="text" placeholder="Code module" formControlName="codeModule" id="codeModule">-->
-<!--          <mat-hint align="end">Not more then 60 characters long.</mat-hint>-->
-<!--          <mat-error *ngIf="hasError('codeModule', 'required')">Code module is required</mat-error>-->
-<!--          <mat-error *ngIf="hasError('codeModule', 'maxlength')">You have more than 60 characters</mat-error>-->
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-select formControlName="annee" id="annee">
-            <mat-option *ngFor="let societe of annees" [value]="societe.anneeDeb">
-              {{societe.anneeDeb}}
-            </mat-option>
-          </mat-select>
-<!--          <input matInput type="text" placeholder="Annee" formControlName="annee" id="annee">-->
-          <mat-hint align="end">Not more then 100 characters long.</mat-hint>
-          <mat-error *ngIf="hasError('annee', 'required')">Annee is required</mat-error>
-          <mat-error *ngIf="hasError('annee', 'maxlength')">You have more than 100 characters</mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-select formControlName="idEnseignant" id="idEnseignant">
-            <mat-option *ngFor="let enseignant of enseignants" [value]="enseignant.idEns">
-              {{enseignant.idEns}}
-            </mat-option>
-          </mat-select>
-<!--          <input matInput type="text" placeholder="ID Enseignant" formControlName="idEnseignant" id="idEnseignant">-->
-          <mat-hint align="end">Not more then 100 characters long.</mat-hint>
-          <mat-error *ngIf="hasError('idEnseignant', 'required')">ID Enseignant classe is required</mat-error>
-          <mat-error *ngIf="hasError('idEnseignant', 'maxlength')">You have more than 100 characters</mat-error>
-        </mat-form-field>
-
-      </mat-card-content>
-      <mat-card-actions align="center">
-        <button mat-raised-button color="primary">Create</button>
-<!--        <button mat-raised-button color="primary" [disabled]="!planEtudeForm.valid">Create</button>-->
-        <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
-      </mat-card-actions>
-    </form>
-  </mat-card>
-</section>
-
-
+<!--<p>plan-etude-create works!</p>-->
 <!--<section fxLayout="row wrap" fxLayoutAlign="center center">-->
 <!--  <mat-card fxFlex="500px" fxFlex.xs="100%">-->
-<!--    <mat-card-title>Create a new admin</mat-card-title>-->
+<!--    <mat-card-title>Create a new Plan Etude</mat-card-title>-->
 <!--    <form [formGroup]="planEtudeForm" autocomplete="off" novalidate (ngSubmit)="createPlanEtude(planEtudeForm.value)" fxLayout="column wrap"-->
 <!--          fxLayoutAlign="center center" fxLayoutGap="10px">-->
 <!--      <mat-card-content>-->
 <!--        <mat-form-field>-->
-<!--          <input matInput type="text" placeholder="Code Module" formControlName="codeModule" id="codeModule">-->
-<!--          <mat-hint align="end">Not more then 60 characters long.</mat-hint>-->
-<!--          <mat-error *ngIf="hasError('codeModule', 'required')">Code Module is required</mat-error>-->
-<!--          <mat-error *ngIf="hasError('codeModule', 'maxlength')">You have more than 60 characters</mat-error>-->
+<!--          <mat-select (selectionChange)="handleChange($event)" formControlName="codeClasse" id="codeClasse">-->
+<!--            <mat-option *ngFor="let classe of classes" [value]="classe.codeCl">-->
+<!--              {{classe.codeCl}}-->
+<!--            </mat-option>-->
+<!--          </mat-select>-->
+<!--          &lt;!&ndash;          <input matInput type="text" placeholder="Code classe" formControlName="codeClasse" id="codeClasse">&ndash;&gt;-->
+<!--          <mat-hint align="end">Not more then 100 characters long.</mat-hint>-->
+<!--          <mat-error *ngIf="hasError('codeClasse', 'required')">Code classe is required</mat-error>-->
+<!--          <mat-error *ngIf="hasError('codeClasse', 'maxlength')">You have more than 100 characters</mat-error>-->
+<!--        </mat-form-field>-->
+<!--        <mat-form-field>-->
+<!--          <mat-select formControlName="codeModule" id="codeModule">-->
+<!--            <mat-option *ngFor="let module of modules" [value]="module.codeModule">-->
+<!--              {{module.codeModule}}-->
+<!--            </mat-option>-->
+<!--          </mat-select>-->
+<!--&lt;!&ndash;          <input matInput type="text" placeholder="Code module" formControlName="codeModule" id="codeModule">&ndash;&gt;-->
+<!--&lt;!&ndash;          <mat-hint align="end">Not more then 60 characters long.</mat-hint>&ndash;&gt;-->
+<!--&lt;!&ndash;          <mat-error *ngIf="hasError('codeModule', 'required')">Code module is required</mat-error>&ndash;&gt;-->
+<!--&lt;!&ndash;          <mat-error *ngIf="hasError('codeModule', 'maxlength')">You have more than 60 characters</mat-error>&ndash;&gt;-->
 <!--        </mat-form-field>-->
 
+<!--        <mat-form-field>-->
+<!--          <mat-select formControlName="annee" id="annee">-->
+<!--            <mat-option *ngFor="let societe of annees" [value]="societe.anneeDeb">-->
+<!--              {{societe.anneeDeb}}-->
+<!--            </mat-option>-->
+<!--          </mat-select>-->
+<!--&lt;!&ndash;          <input matInput type="text" placeholder="Annee" formControlName="annee" id="annee">&ndash;&gt;-->
+<!--          <mat-hint align="end">Not more then 100 characters long.</mat-hint>-->
+<!--          <mat-error *ngIf="hasError('annee', 'required')">Annee is required</mat-error>-->
+<!--          <mat-error *ngIf="hasError('annee', 'maxlength')">You have more than 100 characters</mat-error>-->
+<!--        </mat-form-field>-->
 
 <!--        <mat-form-field>-->
-<!--          <input matInput type="text" placeholder="Admin's password" formControlName="password">-->
+<!--          <mat-select formControlName="idEnseignant" id="idEnseignant">-->
+<!--            <mat-option *ngFor="let enseignant of enseignants" [value]="enseignant.idEns">-->
+<!--              {{enseignant.idEns}}-->
+<!--            </mat-option>-->
+<!--          </mat-select>-->
+<!--&lt;!&ndash;          <input matInput type="text" placeholder="ID Enseignant" formControlName="idEnseignant" id="idEnseignant">&ndash;&gt;-->
 <!--          <mat-hint align="end">Not more then 100 characters long.</mat-hint>-->
-<!--          <mat-error *ngIf="hasError('password', 'required')">Password is required</mat-error>-->
-<!--          <mat-error *ngIf="hasError('password', 'maxlength')">You have more than 100 characters</mat-error>-->
+<!--          <mat-error *ngIf="hasError('idEnseignant', 'required')">ID Enseignant classe is required</mat-error>-->
+<!--          <mat-error *ngIf="hasError('idEnseignant', 'maxlength')">You have more than 100 characters</mat-error>-->
+<!--        </mat-form-field>-->
+
+<!--        <mat-form-field>-->
+<!--          <mat-select formControlName="numSemestre" id="numSemestre">-->
+<!--            <mat-option value="1">1</mat-option>-->
+<!--            <mat-option value="2">2</mat-option>-->
+<!--            <mat-option value="3">3</mat-option>-->
+<!--          </mat-select>-->
+<!--          <mat-hint align="end">Not more then 100 characters long.</mat-hint>-->
+<!--          <mat-error *ngIf="hasError('numSemestre', 'required')">numSemestre is required</mat-error>-->
+<!--        </mat-form-field>-->
+
+<!--        <mat-form-field>-->
+<!--          <input matInput type="number" formControlName="nbheuradd" id="nbheuradd" />-->
+<!--          <mat-error *ngIf="hasError('nbheuradd', 'required')">nb heure is required</mat-error>-->
 <!--        </mat-form-field>-->
 <!--      </mat-card-content>-->
 <!--      <mat-card-actions align="center">-->
-<!--        <button mat-raised-button color="primary" [disabled]="!adminForm.valid">Create</button>-->
+<!--        <button mat-raised-button color="primary">Create</button>-->
+<!--&lt;!&ndash;        <button mat-raised-button color="primary" [disabled]="!planEtudeForm.valid">Create</button>&ndash;&gt;-->
 <!--        <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>-->
 <!--      </mat-card-actions>-->
 <!--    </form>-->
 <!--  </mat-card>-->
 <!--</section>-->
 
+<div fxLayout fxLayoutAlign="center center">
+  <mat-form-field fxFlex="40%">
+    <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+  <div>
+    <button [disabled]="isSaving" mat-button (click)="savePlanEtude()">Sauvegarder</button>
+  </div>
+</div>
+<p *ngIf="data.data.length <= 0">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</p>
+<table mat-table [dataSource]="data" class="mat-elevation-z8" [hidden]="data.data.length <= 0" matSort>
+  <ng-container matColumnDef="classe">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Classe </th>
+    <td mat-cell *matCellDef="let element"> {{element.classe}} </td>
+  </ng-container>
+  <ng-container matColumnDef="module">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Module </th>
+    <td mat-cell *matCellDef="let element"> {{element.module}} </td>
+  </ng-container>
+  <ng-container matColumnDef="enseignant">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Enseignant </th>
+    <td mat-cell *matCellDef="let element"> {{element.enseignant}} </td>
+  </ng-container>
+  <ng-container matColumnDef="nbHeure">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Heures </th>
+    <td mat-cell *matCellDef="let element"> {{element.nbHeure}} </td>
+  </ng-container>
 
-<!--<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">-->
-<!--  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}-->
-<!--</button>-->
-<!--<mat-vertical-stepper [linear]="isLinear" #stepper>-->
-<!--  <mat-step [stepControl]="firstFormGroup">-->
-<!--    <form [formGroup]="firstFormGroup">-->
-<!--      <ng-template matStepLabel>Annee</ng-template>-->
-<!--      <mat-form-field appearance="fill">-->
-<!--        <mat-label>Annee</mat-label>-->
-<!--        <input matInput placeholder="Annee" formControlName="annee" required>-->
-<!--      </mat-form-field>-->
-<!--      <div>-->
-<!--        <button mat-button matStepperNext>Next</button>-->
-<!--      </div>-->
-<!--    </form>-->
-<!--  </mat-step>-->
-<!--  <mat-step [stepControl]="secondFormGroup">-->
-<!--    <form [formGroup]="secondFormGroup">-->
-<!--      <ng-template matStepLabel>Fill out your address</ng-template>-->
-<!--      <mat-form-field appearance="fill">-->
-<!--        <mat-label>Address</mat-label>-->
-<!--        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"-->
-<!--               required>-->
-<!--      </mat-form-field>-->
-<!--      <div>-->
-<!--        <button mat-button matStepperPrevious>Back</button>-->
-<!--        <button mat-button matStepperNext>Next</button>-->
-<!--      </div>-->
-<!--    </form>-->
-<!--  </mat-step>-->
-<!--  <mat-step>-->
-<!--    <ng-template matStepLabel>Done</ng-template>-->
-<!--    <p>You are now done.</p>-->
-<!--    <div>-->
-<!--      <button mat-button matStepperPrevious>Back</button>-->
-<!--      <button mat-button (click)="stepper.reset()">Reset</button>-->
-<!--    </div>-->
-<!--  </mat-step>-->
-<!--</mat-vertical-stepper>-->
-
-
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator [pageSize]="15" [pageSizeOptions]="[10, 20, 50]">
+</mat-paginator>
 

@@ -99,19 +99,25 @@ export class LoginComponent implements OnInit {
 
   authenticateEtudiant(): void {
     console.log('redirect to etudiant space');
-    this.authenticationService.login(this.form.username.value, this.form.password.value)
-      .pipe(first())
-      .subscribe({
-        next: () => {
-          // get return url from route parameters or default to '/'
-          const returnUrl = this.route.snapshot.queryParams.returnUrl || '/etudiant';
-          this.router.navigate([returnUrl]);
-        },
-        error: error => {
-          this.error = error;
-          this.loading = false;
-        }
-      });
+    // this.authenticationService.login(this.form.username.value, this.form.password.value)
+    //   .pipe(first())
+    //   .subscribe({
+    //     next: () => {
+    //       // get return url from route parameters or default to '/'
+    //       const returnUrl = this.route.snapshot.queryParams.returnUrl || '/etudiant';
+    //       this.router.navigate([returnUrl]);
+    //     },
+    //     error: error => {
+    //       this.error = error;
+    //       this.loading = false;
+    //     }
+    //   });
+      this.authenticationService.login(this.form.username.value, this.form.password.value)
+      .subscribe((value)=>{
+        console.log("Logged in as Etudiant", value);
+        const returnUrl ='/etudiant-list';
+        this.router.navigate([returnUrl])
+      })
   }
 
   authenticateEnseignant(): void {
@@ -121,7 +127,7 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: () => {
           // get return url from route parameters or default to '/'
-          const returnUrl = this.route.snapshot.queryParams.returnUrl || '/enseignant';
+          const returnUrl = '/enseignant-list';
           this.router.navigate([returnUrl]);
         },
         error: error => {
@@ -138,7 +144,7 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: () => {
           // get return url from route parameters or default to '/'
-          const returnUrl = this.route.snapshot.queryParams.returnUrl || '/admin-list';
+          const returnUrl = '/admin-list';
           this.router.navigate([returnUrl]);
         },
         error: error => {

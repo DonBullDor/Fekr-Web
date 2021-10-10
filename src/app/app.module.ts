@@ -90,6 +90,7 @@ import { EmploiDuTempCreate1Component } from './modules/admin/emploi-du-temps/em
 import {PlanEtudeService} from './_services';
 import {NotesServices} from './_services/notes.services';
 import { ClasseUpdateComponent } from './modules/classe/classe-update/classe-update.component';
+import {EmploiDuTempService} from "./_services/emploi-du-temp.service";
 
 @NgModule({
   declarations: [
@@ -179,6 +180,7 @@ import { ClasseUpdateComponent } from './modules/classe/classe-update/classe-upd
   providers: [
     PlanEtudeService,
     NotesServices,
+    EmploiDuTempService,
     // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 

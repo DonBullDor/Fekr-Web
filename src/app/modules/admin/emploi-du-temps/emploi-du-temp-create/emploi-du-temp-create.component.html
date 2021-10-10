@@ -1,41 +1,116 @@
 <p>emploi-du-temp-create works!</p>
 
-<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-</button>
-<mat-vertical-stepper [linear]="isLinear" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Fill out your name</ng-template>
-      <mat-form-field appearance="fill">
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%">
+    <mat-card-title>Generer Emploi du Temps</mat-card-title>
+    <form [formGroup]="emploiDuTempForm" autocomplete="off" novalidate
+      (ngSubmit)="createEmploiDuTemp(emploiDuTempForm.value)" fxLayout="column wrap" fxLayoutAlign="center center"
+      fxLayoutGap="10px">
+      <mat-card-content>
+        <mat-form-field>
+          <mat-select formControlName="annee" id="annee">
+            <mat-option *ngFor="let societe of annees" [value]="societe.anneeDeb">
+              {{societe.anneeDeb}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="hasError('annee', 'required')">Annee is required</mat-error>
+          <mat-error *ngIf="hasError('annee', 'maxlength')">You have more than 100 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select formControlName="codeClasse" id="codeClasse">
+            <mat-option *ngFor="let classe of classes" [value]="classe.codeCl">
+              {{classe.codeCl}}
+            </mat-option>
+          </mat-select>
+
+          <mat-error *ngIf="hasError('codeClasse', 'required')">codeClasse is required</mat-error>
+          <mat-error *ngIf="hasError('codeClasse', 'maxlength')">You have more than 100 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select formControlName="semestre" id="semestre">
+            <mat-option value="1">1</mat-option>
+            <mat-option value="2">2</mat-option>
+          </mat-select>
+
+          <mat-error *ngIf="hasError('semestre', 'required')">semestre is required</mat-error>
+          <mat-error *ngIf="hasError('semestre', 'maxlength')">You have more than 100 characters</mat-error>
+        </mat-form-field>
+
+        <!--        <mat-form-field>-->
+        <!--          <mat-select formControlName="typeSeance" id="typeSeance">-->
+        <!--            <mat-option value="R">R</mat-option>-->
+        <!--            <mat-option value="G1">G1</mat-option>-->
+        <!--            <mat-option value="G1 SA">G1 SA</mat-option>-->
+        <!--            <mat-option value="G1 SB">G1 SB</mat-option>-->
+        <!--            <mat-option value="G2">G2</mat-option>-->
+        <!--          </mat-select>-->
+
+        <!--          <mat-error *ngIf="hasError('typeSeance', 'required')">Annee is required</mat-error>-->
+        <!--          <mat-error *ngIf="hasError('typeSeance', 'maxlength')">You have more than 100 characters</mat-error>-->
+        <!--        </mat-form-field>-->
+      </mat-card-content>
+      <mat-card-actions align="center">
+        <button mat-raised-button color="primary">Generer</button>
+      </mat-card-actions>
     </form>
-  </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out your address</ng-template>
-      <mat-form-field appearance="fill">
-        <mat-label>Address</mat-label>
-        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-               required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
-  </mat-step>
-</mat-vertical-stepper>
+  </mat-card>
+  <br>
+  <br>
+  <!-- Generated table -->
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="jour">
+      <th mat-header-cell *matHeaderCellDef> {{displayedColumns[0]}}</th>
+      <td mat-cell *matCellDef="let element"> {{element.jour}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="8h->9h">
+      <th mat-header-cell *matHeaderCellDef> {{displayedColumns[1]}} </th>
+      <td mat-cell *matCellDef="let element"> {{element.first}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="9h->10h">
+      <th mat-header-cell *matHeaderCellDef> {{displayedColumns[2]}} </th>
+      <td mat-cell *matCellDef="let element"> {{element.second}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="10h-12h">
+      <th mat-header-cell *matHeaderCellDef> {{displayedColumns[3]}} </th>
+      <td mat-cell *matCellDef="let element"> {{element.third}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="12h->13h">
+      <th mat-header-cell *matHeaderCellDef> {{displayedColumns[4]}} </th>
+      <td mat-cell *matCellDef="let element"> {{element.fourth}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="13h->14h">
+      <th mat-header-cell *matHeaderCellDef> {{displayedColumns[5]}} </th>
+      <td mat-cell *matCellDef="let element"> {{element.fifth}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="14h->15h">
+      <th mat-header-cell *matHeaderCellDef> {{displayedColumns[6]}} </th>
+      <td mat-cell *matCellDef="let element"> {{element.sixth}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="15h->16h">
+      <th mat-header-cell *matHeaderCellDef> {{displayedColumns[6]}} </th>
+      <td mat-cell *matCellDef="let element"> {{element.sixth}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="16h->17h">
+      <th mat-header-cell *matHeaderCellDef> {{displayedColumns[6]}} </th>
+      <td mat-cell *matCellDef="let element"> {{element.sixth}} </td>
+    </ng-container>
+  </table>
+
+  <button [disabled]="!canSave" type="button" mat-raised-button color="warn" (click)="handleSave()">Save</button>
+</section>

@@ -11,10 +11,52 @@
 <p *ngIf="!dataSource">
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </p>
+<form [formGroup]="planEtudeForm">
+  <mat-form-field>
+    <mat-select formControlName="idEnseignant" id="idEnseignant">
+      <mat-option *ngFor="let enseignant of enseignants" [value]="enseignant.idEns">
+        {{enseignant.idEns}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select formControlName="annee" id="annee">
+      <mat-option *ngFor="let societe of annees" [value]="societe.anneeDeb">
+        {{societe.anneeDeb}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select formControlName="codeClasse" id="codeClasse">
+      <mat-option *ngFor="let classe of classes" [value]="classe.codeCl">
+        {{classe.codeCl}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select formControlName="numSemestre" id="numSemestre">
+      <mat-option value="1">1</mat-option>
+      <mat-option value="2">2</mat-option>
+      <mat-option value="3">3</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="getAllPlansEtudesByCriteria(planEtudeForm.value)">Filter</button>
+
+</form>
 <mat-card-content>
-  <table mat-table #table [dataSource]="dataSource" class="table-striped mat-elevation-z8" [hidden]="!dataSource" matSort>
+  <table mat-table #table [dataSource]="dataSource" class="table-striped mat-elevation-z8" matSort>
     <ng-container matColumnDef="module">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Module </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <!-- <div style="display: flex; align-items: center;">
+          <span mat-sort-header>Module</span>
+          <button mat-icon-button>
+            <mat-icon mat-icon-button color="primary" [matMenuTriggerFor]="menu"
+              [matMenuTriggerData]="{columnName: 'Module'}">filter_list </mat-icon>
+          </button>
+        </div> -->
+        Module
+      </th>
       <td mat-cell *matCellDef="let element"> {{element.codeModule}} </td>
     </ng-container>
 
@@ -57,4 +99,47 @@
   <mat-paginator [pageSize]="2" [pageSizeOptions]="[2, 4, 6, 10, 20]">
   </mat-paginator>
 </mat-card-content>
+<!--
+<mat-menu #menu="matMenu" class="matMenu">
+  <ng-template matMenuContent let-dataColumnName="columnName">
+    <div class="flex-column" (click)="$event.stopPropagation();">
+      <div class="mb-5">
+        <mat-form-field class="fullWidth" appearance="outline">
+          <mat-label>Choose a filter *</mat-label>
+          <mat-select #selectedOperationFilter [value]="'contains'">
+            <mat-option value="contains" select>Contains</mat-option>
+            <mat-option value="equals">Equals</mat-option>
+            <mat-option value="greaterThan">Greater than</mat-option>
+            <mat-option value="lessThan">Less than</mat-option>
+            <mat-option value="endWith">End with</mat-option>
+            <mat-option value="startWith">Start With</mat-option>
+          </mat-select>
+        </mat-form-field>
 
+      </div>
+
+      <div class="mb-5 fullWidth">
+        <mat-form-field class="fullWidth" appearance="outline">
+          <mat-label>write a value*</mat-label>
+          <input matInput #searchValue type="text">
+        </mat-form-field>
+      </div>
+
+      <div class="fullWidth flex-row mb-5 flex-justify-space-between">
+        <button [disabled]="!searchValue.value" mat-raised-button color="primary"
+          class="flex-row flex-align-center btn-filter-action" (click)="applyFilter(dataColumnName,
+                   selectedOperationFilter.value,  searchValue.value)">
+
+          <mat-icon>check</mat-icon>
+          <label>filter</label>
+        </button>
+
+        <button mat-raised-button class="flex-row flex-align-center btn-filter-action" color="warn"
+          (click)="clearFilter(dataColumnName)">
+          <mat-icon>clear</mat-icon>
+          <label>reset</label>
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</mat-menu> -->
