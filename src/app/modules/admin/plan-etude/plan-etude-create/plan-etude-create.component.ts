@@ -143,21 +143,24 @@ export class PlanEtudeCreateComponent implements OnInit, AfterViewInit {
 
   public savePlanEtude(): void {
     this.isSaving = true;
-    this.data.data.map((plan) => {
-      const apiUrl = 'api/PlanEtude/'
-      // + plan.module + '/' + plan.classe + '/2021/1';
+    const apiUrl = 'api/PlanEtude/CreateAllPlanEtude';
+    const body: PlanEtude[] = [];
+    for (const plan of this.data.data){
       const dataToInsert: PlanEtude = {
         codeModule: plan.module,
         codeCl: plan.classe,
         anneeDeb: '2021',
         idEns: plan.enseignant,
         numSemestre : 1,
-        nbheuradd: plan.nbHeure,
+        nbHeures : plan.nbHeure,
       };
-      this.repo.create(apiUrl, dataToInsert).subscribe((result) => {
-      });
-
+      body.push(dataToInsert);
+    }
+    this.repo.createAllPlanEtude(apiUrl, body.splice(0, 10)).subscribe((result) => {
+      console.log(result);
+      if (result){
+        this.isSaving = false;
+      }
     });
-    this.isSaving = false;
   }
 }

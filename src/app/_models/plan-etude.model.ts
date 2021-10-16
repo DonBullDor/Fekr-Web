@@ -5,7 +5,7 @@ export class PlanEtude{
     public anneeDeb?: string,
     public idEns?: string,
     public numSemestre?: number,
-    public nbheuradd?: number
+    public nbHeures ?: number
   ){}
 }
 

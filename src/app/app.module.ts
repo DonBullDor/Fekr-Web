@@ -91,6 +91,7 @@ import {PlanEtudeService} from './_services';
 import {NotesServices} from './_services/notes.services';
 import { ClasseUpdateComponent } from './modules/classe/classe-update/classe-update.component';
 import {EmploiDuTempService} from "./_services/emploi-du-temp.service";
+import { ToolbarComponent } from './modules/navigations/toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
@@ -139,7 +140,8 @@ import {EmploiDuTempService} from "./_services/emploi-du-temp.service";
     SaisieNotesComponent,
     EmploiDuTempsDetailComponent,
     EmploiDuTempCreate1Component,
-    ClasseUpdateComponent
+    ClasseUpdateComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,

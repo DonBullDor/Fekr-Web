@@ -77,6 +77,10 @@ export class PlanEtudeService {
       });
   }
 
+  createAllPlanEtude(url: string, planEtude: PlanEtude[]): Observable<boolean> {
+    return this.http.post<boolean>(`http://localhost:5000/${url}`, planEtude);
+  }
+
   replacePlanEtude(planEtude: PlanEtude): void {
     const data = {
       codeModule: planEtude.codeModule,

@@ -15,10 +15,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 interface IFilters
 {
-  classe: string,
-  numSemestre: number,
-  idEnseignant: string,
-  annee: string
+  classe: string;
+  numSemestre: number;
+  idEnseignant: string;
+  annee: string;
 }
 
 @Component({
@@ -28,7 +28,7 @@ interface IFilters
 })
 export class SaisieNotesComponent implements OnInit, AfterViewInit {
   public classes: Classe[] = [];
-  public annees: Societe[]= [];
+  public annees: Societe[] = [];
   public filtersForm: FormGroup;
   displayedColumns: string[] = ['idEtudiant', 'idEnseignant', 'codeClasse', 'annee', 'codeModule', 'orale', 'semestre',
     'dc1', 'dc2', 'ds', 'date', 'detail', 'update'];
@@ -45,11 +45,11 @@ export class SaisieNotesComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.classeRepo.getAllClassesTest().subscribe((classes) => {
-      this.classes == classes
-    })
+      this.classes == classes;
+    });
     this.anneeRepo.getAnnees().subscribe((annees) => {
-      this.annees = annees
-    })
+      this.annees = annees;
+    });
     this.filtersForm = new FormGroup ({
       codeClasse: new FormControl('', Validators.required),
       annee: new FormControl('', Validators.required),
@@ -74,19 +74,19 @@ export class SaisieNotesComponent implements OnInit, AfterViewInit {
     const filter: IFilters = {
       classe: notesFormValue.codeClasse,
       annee: notesFormValue.annee,
-      idEnseignant: "",
+      idEnseignant: '',
       numSemestre : notesFormValue.numSemestre
     };
 
     this.repo.getNotesByFilters(filter.classe, filter.idEnseignant, filter.annee, filter.numSemestre)
       .subscribe(res => {
           // this is temporary, until we create our dialogs
-          //this.location.back();
+          // this.location.back();
           this.dataSource.data = res as Notes[];
         },
         (error => {
           // temporary as well
-          //this.location.back();
+          // this.location.back();
         })
       );
   }
